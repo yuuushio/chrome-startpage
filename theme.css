@@ -1,0 +1,38 @@
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+}
+
+.theme-solarized-dark {
+  --bg: #002b36;
+  --fg: #839496;
+}
+
+.theme-solarized-light {
+  --bg: #fdf6e3;
+  --fg: #657b83;
+}
+
+.theme-monokai {
+  --bg: #272822;
+  --fg: #f8f8f2;
+}
+
+.theme-dracula {
+  --bg: #282a36;
+  --fg: #f8f8f2;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  margin: 0;
+  padding: 2rem;
+  font-family: sans-serif;
+  transition: none;
+}
+
+select {
+  padding: 0.4rem;
+  font-size: 1rem;
+}
