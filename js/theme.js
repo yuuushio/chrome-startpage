@@ -1,16 +1,13 @@
-(function () {
+(() => {
   'use strict';
 
+  // === Theme Switching ===
   const THEME_STORAGE_KEY = 'theme';
-  const THEMES = [
-    'default',
-    'solarized-dark',
-  ];
-
-  const themeSelector = document.getElementById('theme-selector');
-  const root = document.documentElement;
+  const THEMES = ['default', 'solarized-dark'];
   const themeDir = 'css/';
   const loadedThemes = new Set();
+  const root = document.documentElement;
+  const themeSelector = document.getElementById('theme-selector');
 
   function loadThemeCSS(theme) {
     return new Promise((resolve, reject) => {
@@ -40,49 +37,52 @@
     try {
       await loadThemeCSS(theme);
       setTheme(theme);
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(`[theme] ${err.message}`);
     }
   }
 
   function initThemeSwitcher() {
     const saved = localStorage.getItem(THEME_STORAGE_KEY);
     const initial = THEMES.includes(saved) ? saved : THEMES[0];
-    applyTheme(initial);
-    themeSelector.value = initial;
 
-    themeSelector.addEventListener('change', e => {
+    applyTheme(initial);
+    if (themeSelector) themeSelector.value = initial;
+
+    themeSelector?.addEventListener('change', e => {
       applyTheme(e.target.value);
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initThemeSwitcher);
-})();
+  // === Tab Switching ===
+  const TAB_STORAGE_KEY = 'activeTab';
+  const tabButtons = document.querySelectorAll('[data-tab-btn]');
 
-(function () {
-  'use strict';
+  function activateTab(tabId) {
+    root.setAttribute('data-active-tab', tabId);
+    localStorage.setItem(TAB_STORAGE_KEY, tabId);
 
-  const root = document.documentElement;
-  const buttons = document.querySelectorAll('[data-tab-btn]');
-  const tabpanel = document.getElementById('links');
-
-  function activate(tab) {
-    root.setAttribute('data-active-tab', tab);
-    localStorage.setItem('activeTab', tab);
-
-    buttons.forEach(btn => {
-      const match = btn.getAttribute('data-tab-btn') === tab;
+    tabButtons.forEach(btn => {
+      const match = btn.getAttribute('data-tab-btn') === tabId;
       btn.setAttribute('aria-selected', match);
     });
   }
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = btn.getAttribute('data-tab-btn');
-      activate(tab);
-    });
-  });
+  function initTabs() {
+    const saved = localStorage.getItem(TAB_STORAGE_KEY) || '1';
+    activateTab(saved);
 
-  const saved = localStorage.getItem('activeTab');
-  activate(saved || '1');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab-btn');
+        activateTab(tabId);
+      });
+    });
+  }
+
+  // === Init ===
+  document.addEventListener('DOMContentLoaded', () => {
+    initThemeSwitcher();
+    initTabs();
+  });
 })();
