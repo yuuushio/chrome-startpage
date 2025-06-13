@@ -104,7 +104,9 @@ html[data-active-tab] .links a[data-tab].is-visible {
 }
 
 .sidebar-image {
-  background: var(--link-box-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem;
   border-radius: 6px;
 }

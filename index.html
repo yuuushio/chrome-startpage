@@ -15,7 +15,7 @@
         <div class="sidebar-top">time / date / weather / etc.</div>
         <div class="sidebar-image">
           <!-- you can use <img> or a div with background-image -->
-          <img src="your-image.png" alt="aesthetic" />
+          <img src="your-image.png" id="theme-image" alt="aesthetic" />
         </div>
         <div class="sidebar-bottom">
           <select id="theme-selector">
@@ -56,6 +56,13 @@
           ]
         }
       ]
+    </script>
+
+    <script id="theme-image-map" type="application/json">
+      {
+        "default": { "src": "images/default.png", "height": "300px" },
+        "solarized-dark": { "src": "images/default.png", "height": "240px" }
+      }
     </script>
     <script src="js/theme.js"></script>
   </body>

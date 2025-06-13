@@ -11,6 +11,8 @@
   const THEME_KEY = 'theme';
   const TAB_KEY = 'activeTab';
   const themeDir = 'css/';
+  const imageConfig = JSON.parse(document.getElementById('theme-image-map').textContent);
+const imageEl = document.getElementById('theme-image');
   const loadedThemes = new Set();
   let TAB_LIST = [];
 
@@ -27,6 +29,12 @@
     if (!THEMES.includes(theme)) return;
     THEMES.forEach(t => root.classList.remove(`theme-${t}`));
     root.classList.add(`theme-${theme}`);
+
+if (imageEl && imageConfig[theme]) {
+  const { src, height } = imageConfig[theme];
+  imageEl.src = src;
+  imageEl.style.height = height;
+}
     localStorage.setItem(THEME_KEY, theme);
   }
 
