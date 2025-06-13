@@ -64,17 +64,25 @@
 
   const root = document.documentElement;
   const buttons = document.querySelectorAll('[data-tab-btn]');
+  const tabpanel = document.getElementById('links');
+
+  function activate(tab) {
+    root.setAttribute('data-active-tab', tab);
+    localStorage.setItem('activeTab', tab);
+
+    buttons.forEach(btn => {
+      const match = btn.getAttribute('data-tab-btn') === tab;
+      btn.setAttribute('aria-selected', match);
+    });
+  }
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.getAttribute('data-tab-btn');
-      root.setAttribute('data-active-tab', tab);
-      localStorage.setItem('activeTab', tab);
+      activate(tab);
     });
   });
 
-  // restore saved tab
   const saved = localStorage.getItem('activeTab');
-  if (saved) root.setAttribute('data-active-tab', saved);
-  else root.setAttribute('data-active-tab', '1'); // default
+  activate(saved || '1');
 })();

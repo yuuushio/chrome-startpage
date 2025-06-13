@@ -1,4 +1,11 @@
 html.theme-default {
   --bg: #ffffff;
   --fg: #000000;
+  --tab-bg: #e0e0e0;
+  --tab-fg: #333;
+  --tab-active-bg: #222;
+  --tab-active-fg: #fff;
+  --link-box-bg: #f8f8f8;
+  --link-box-active-bg: #ddd;
+  --focus-ring: 2px solid #005fcc;
 }

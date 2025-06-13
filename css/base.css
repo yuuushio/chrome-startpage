@@ -30,3 +30,61 @@ html[data-active-tab="3"] .links a[data-tab="3"] {
 .tabs button {
   margin-right: 0.5rem;
 }
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  background: var(--tab-bg);
+  color: var(--tab-fg);
+  border: none;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  border-radius: 4px;
+  position: relative;
+}
+
+.tabs button:focus-visible {
+  outline: var(--focus-ring);
+}
+
+html[data-active-tab="1"] .tabs button[data-tab-btn="1"],
+html[data-active-tab="2"] .tabs button[data-tab-btn="2"],
+html[data-active-tab="3"] .tabs button[data-tab-btn="3"] {
+  background: var(--tab-active-bg);
+  color: var(--tab-active-fg);
+  font-weight: bold;
+  box-shadow: inset 0 -3px 0 #ffcc00;
+}
+
+.links {
+  padding: 1rem;
+  border-radius: 4px;
+  background: var(--link-box-bg);
+  transition: background 0.2s ease;
+}
+
+/* Highlight active link group box */
+html[data-active-tab="1"] .links:has(a[data-tab="1"]:first-child),
+html[data-active-tab="2"] .links:has(a[data-tab="2"]:first-child),
+html[data-active-tab="3"] .links:has(a[data-tab="3"]:first-child) {
+  background: var(--link-box-active-bg);
+}
+
+.links a {
+  display: none;
+  margin: 0.25rem 0;
+  display: block;
+  text-decoration: none;
+  color: var(--tab-fg);
+}
+
+html[data-active-tab="1"] .links a[data-tab="1"],
+html[data-active-tab="2"] .links a[data-tab="2"],
+html[data-active-tab="3"] .links a[data-tab="3"] {
+  display: block;
+}

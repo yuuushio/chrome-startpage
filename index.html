@@ -16,19 +16,38 @@
       <option value="solarized-dark">Solarized Dark</option>
     </select>
 
-    <div class="tabs">
-      <button data-tab-btn="1">1</button>
-      <button data-tab-btn="2">2</button>
-      <button data-tab-btn="3">3</button>
+    <div class="tabs" role="tablist">
+      <button
+        data-tab-btn="1"
+        role="tab"
+        aria-selected="false"
+        aria-controls="links"
+      >
+        1
+      </button>
+      <button
+        data-tab-btn="2"
+        role="tab"
+        aria-selected="false"
+        aria-controls="links"
+      >
+        2
+      </button>
+      <button
+        data-tab-btn="3"
+        role="tab"
+        aria-selected="false"
+        aria-controls="links"
+      >
+        3
+      </button>
     </div>
 
-    <div class="links">
+    <div id="links" class="links" role="tabpanel" tabindex="0">
       <a href="https://example.com/1a" data-tab="1">Example 1A</a>
       <a href="https://example.com/1b" data-tab="1">Example 1B</a>
       <a href="https://example.com/2a" data-tab="2">Example 2A</a>
-      <a href="https://example.com/2b" data-tab="2">Example 2B</a>
       <a href="https://example.com/3a" data-tab="3">Example 3A</a>
-      <!-- etc -->
     </div>
 
     <script src="js/theme.js"></script>
