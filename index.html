@@ -11,45 +11,39 @@
   <body>
     <h1>Start Page</h1>
     <p>Choose a theme:</p>
+    <!-- Theme Selector -->
     <select id="theme-selector">
       <option value="default">Default</option>
       <option value="solarized-dark">Solarized Dark</option>
     </select>
 
-    <div class="tabs" role="tablist">
-      <button
-        data-tab-btn="1"
-        role="tab"
-        aria-selected="false"
-        aria-controls="links"
-      >
-        1
-      </button>
-      <button
-        data-tab-btn="2"
-        role="tab"
-        aria-selected="false"
-        aria-controls="links"
-      >
-        2
-      </button>
-      <button
-        data-tab-btn="3"
-        role="tab"
-        aria-selected="false"
-        aria-controls="links"
-      >
-        3
-      </button>
-    </div>
+    <!-- Tab Buttons -->
+    <div class="tabs" id="tab-buttons" role="tablist"></div>
 
-    <div id="links" class="links" role="tabpanel" tabindex="0">
-      <a href="https://example.com/1a" data-tab="1">Example 1A</a>
-      <a href="https://example.com/1b" data-tab="1">Example 1B</a>
-      <a href="https://example.com/2a" data-tab="2">Example 2A</a>
-      <a href="https://example.com/3a" data-tab="3">Example 3A</a>
-    </div>
+    <!-- Bookmark Links -->
+    <div class="links" id="tab-links" role="tabpanel"></div>
 
+    <!-- JSON Config -->
+    <script id="bookmark-data" type="application/json">
+      [
+        {
+          "tab": "1",
+          "label": "Main",
+          "links": [
+            { "name": "Neovim", "url": "https://neovim.io" },
+            { "name": "GitHub", "url": "https://github.com" }
+          ]
+        },
+        {
+          "tab": "2",
+          "label": "Docs",
+          "links": [
+            { "name": "MDN", "url": "https://developer.mozilla.org" },
+            { "name": "W3C", "url": "https://www.w3.org" }
+          ]
+        }
+      ]
+    </script>
     <script src="js/theme.js"></script>
   </body>
 </html>

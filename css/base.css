@@ -33,7 +33,7 @@ html[data-active-tab="3"] .links a[data-tab="3"] {
 .tabs {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .tabs button {
@@ -88,9 +88,8 @@ html[data-active-tab="3"] .links {
 }
 
 .links a {
-  display: none;
   margin: 0.25rem 0;
-  display: block;
+  display: none;
   text-decoration: none;
   color: var(--tab-fg);
 }

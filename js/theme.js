@@ -1,88 +1,88 @@
 (() => {
   'use strict';
 
-  // === Theme Switching ===
-  const THEME_STORAGE_KEY = 'theme';
-  const THEMES = ['default', 'solarized-dark'];
-  const themeDir = 'css/';
-  const loadedThemes = new Set();
   const root = document.documentElement;
   const themeSelector = document.getElementById('theme-selector');
+  const tabContainer = document.getElementById('tab-buttons');
+  const linkContainer = document.getElementById('tab-links');
+  const bookmarkData = document.getElementById('bookmark-data');
+
+  const THEMES = ['default', 'solarized-dark'];
+  const THEME_KEY = 'theme';
+  const TAB_KEY = 'activeTab';
+  const themeDir = 'css/';
+  const loadedThemes = new Set();
+  let TAB_LIST = [];
 
   function loadThemeCSS(theme) {
-    return new Promise((resolve, reject) => {
-      if (loadedThemes.has(theme)) return resolve();
-
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = `${themeDir}/theme.${theme}.css`;
-      link.onload = () => {
-        loadedThemes.add(theme);
-        resolve();
-      };
-      link.onerror = () => reject(new Error(`Failed to load theme: ${theme}`));
-      document.head.appendChild(link);
-    });
+    if (loadedThemes.has(theme)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `${themeDir}/theme.${theme}.css`;
+    link.onload = () => loadedThemes.add(theme);
+    document.head.appendChild(link);
   }
 
   function setTheme(theme) {
     if (!THEMES.includes(theme)) return;
-
     THEMES.forEach(t => root.classList.remove(`theme-${t}`));
     root.classList.add(`theme-${theme}`);
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    localStorage.setItem(THEME_KEY, theme);
   }
 
-  async function applyTheme(theme) {
-    try {
-      await loadThemeCSS(theme);
-      setTheme(theme);
-    } catch (err) {
-      console.error(`[theme] ${err.message}`);
-    }
-  }
-
-  function initThemeSwitcher() {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY);
-    const initial = THEMES.includes(saved) ? saved : THEMES[0];
-
-    applyTheme(initial);
-    if (themeSelector) themeSelector.value = initial;
-
+  function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY) || THEMES[0];
+    loadThemeCSS(saved);
+    setTheme(saved);
+    if (themeSelector) themeSelector.value = saved;
     themeSelector?.addEventListener('change', e => {
-      applyTheme(e.target.value);
+      const theme = e.target.value;
+      loadThemeCSS(theme);
+      setTheme(theme);
     });
   }
 
-  // === Tab Switching ===
-  const TAB_STORAGE_KEY = 'activeTab';
-  const tabButtons = document.querySelectorAll('[data-tab-btn]');
+  function renderBookmarks(json) {
+    const tabs = [], links = [];
+    TAB_LIST = [];
 
-  function activateTab(tabId) {
-    root.setAttribute('data-active-tab', tabId);
-    localStorage.setItem(TAB_STORAGE_KEY, tabId);
-
-    tabButtons.forEach(btn => {
-      const match = btn.getAttribute('data-tab-btn') === tabId;
-      btn.setAttribute('aria-selected', match);
+    json.forEach(group => {
+      const tab = group.tab;
+      TAB_LIST.push(tab);
+      tabs.push(`<button data-tab-btn="${tab}" role="tab" aria-selected="false">${group.label}</button>`);
+      group.links.forEach(link =>
+        links.push(`<a href="${link.url}" data-tab="${tab}" rel="noopener noreferrer">${link.name}</a>`)
+      );
     });
+
+    tabContainer.innerHTML = tabs.join('');
+    linkContainer.innerHTML = links.join('');
+  }
+
+  function activateTab(tab) {
+    root.setAttribute('data-active-tab', tab);
+    localStorage.setItem(TAB_KEY, tab);
+    document.querySelectorAll('[data-tab-btn]').forEach(btn =>
+      btn.setAttribute('aria-selected', btn.getAttribute('data-tab-btn') === tab)
+    );
   }
 
   function initTabs() {
-    const saved = localStorage.getItem(TAB_STORAGE_KEY) || '1';
-    activateTab(saved);
-
-    tabButtons.forEach(btn => {
+    const saved = localStorage.getItem(TAB_KEY);
+    const fallback = TAB_LIST[0] || '1';
+    const active = TAB_LIST.includes(saved) ? saved : fallback;
+    activateTab(active);
+    document.querySelectorAll('[data-tab-btn]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const tabId = btn.getAttribute('data-tab-btn');
-        activateTab(tabId);
+        activateTab(btn.getAttribute('data-tab-btn'));
       });
     });
   }
 
-  // === Init ===
   document.addEventListener('DOMContentLoaded', () => {
-    initThemeSwitcher();
+    const data = JSON.parse(bookmarkData.textContent);
+    renderBookmarks(data);
     initTabs();
+    initTheme();
   });
 })();
