@@ -59,13 +59,19 @@
     linkContainer.innerHTML = links.join('');
   }
 
-  function activateTab(tab) {
-    root.setAttribute('data-active-tab', tab);
-    localStorage.setItem(TAB_KEY, tab);
-    document.querySelectorAll('[data-tab-btn]').forEach(btn =>
-      btn.setAttribute('aria-selected', btn.getAttribute('data-tab-btn') === tab)
-    );
-  }
+function activateTab(tab) {
+  root.setAttribute('data-active-tab', tab);
+  localStorage.setItem(TAB_KEY, tab);
+
+  document.querySelectorAll('[data-tab-btn]').forEach(btn => {
+    btn.classList.toggle('is-active', btn.getAttribute('data-tab-btn') === tab);
+  });
+
+  document.querySelectorAll('.links a').forEach(link => {
+    const match = link.getAttribute('data-tab') === tab;
+    link.classList.toggle('is-visible', match);
+  });
+}
 
   function initTabs() {
     const saved = localStorage.getItem(TAB_KEY);
