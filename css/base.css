@@ -16,3 +16,17 @@ select {
   padding: 0.4rem;
   font-size: 1rem;
 }
+
+.links a {
+  display: none;
+}
+
+html[data-active-tab="1"] .links a[data-tab="1"],
+html[data-active-tab="2"] .links a[data-tab="2"],
+html[data-active-tab="3"] .links a[data-tab="3"] {
+  display: inline-block;
+}
+
+.tabs button {
+  margin-right: 0.5rem;
+}

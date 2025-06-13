@@ -3,10 +3,8 @@
 
   const THEME_STORAGE_KEY = 'theme';
   const THEMES = [
+    'default',
     'solarized-dark',
-    'solarized-light',
-    'monokai',
-    'dracula',
   ];
 
   const themeSelector = document.getElementById('theme-selector');
@@ -59,4 +57,24 @@
   }
 
   document.addEventListener('DOMContentLoaded', initThemeSwitcher);
+})();
+
+(function () {
+  'use strict';
+
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll('[data-tab-btn]');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.getAttribute('data-tab-btn');
+      root.setAttribute('data-active-tab', tab);
+      localStorage.setItem('activeTab', tab);
+    });
+  });
+
+  // restore saved tab
+  const saved = localStorage.getItem('activeTab');
+  if (saved) root.setAttribute('data-active-tab', saved);
+  else root.setAttribute('data-active-tab', '1'); // default
 })();

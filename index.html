@@ -12,11 +12,24 @@
     <h1>Start Page</h1>
     <p>Choose a theme:</p>
     <select id="theme-selector">
+      <option value="default">Default</option>
       <option value="solarized-dark">Solarized Dark</option>
-      <option value="solarized-light">Solarized Light</option>
-      <option value="monokai">Monokai</option>
-      <option value="dracula">Dracula</option>
     </select>
+
+    <div class="tabs">
+      <button data-tab-btn="1">1</button>
+      <button data-tab-btn="2">2</button>
+      <button data-tab-btn="3">3</button>
+    </div>
+
+    <div class="links">
+      <a href="https://example.com/1a" data-tab="1">Example 1A</a>
+      <a href="https://example.com/1b" data-tab="1">Example 1B</a>
+      <a href="https://example.com/2a" data-tab="2">Example 2A</a>
+      <a href="https://example.com/2b" data-tab="2">Example 2B</a>
+      <a href="https://example.com/3a" data-tab="3">Example 3A</a>
+      <!-- etc -->
+    </div>
 
     <script src="js/theme.js"></script>
   </body>
