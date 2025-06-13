@@ -10,16 +10,30 @@
   </head>
   <body>
     <h1>Start Page</h1>
-    <p>Choose a theme:</p>
-    <!-- Theme Selector -->
-    <select id="theme-selector">
-      <option value="default">Default</option>
-      <option value="solarized-dark">Solarized Dark</option>
-    </select>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="sidebar-top">time / date / weather / etc.</div>
+        <div class="sidebar-image">
+          <!-- you can use <img> or a div with background-image -->
+          <img src="your-image.png" alt="aesthetic" />
+        </div>
+        <div class="sidebar-bottom">
+          <select id="theme-selector">
+            <option value="default">Default</option>
+            <option value="solarized-dark">Solarized Dark</option>
+          </select>
+        </div>
+      </aside>
 
-    <div class="tab-container">
-      <div class="tabs" id="tab-buttons" role="tablist"></div>
-      <div class="links" id="tab-links" role="tabpanel"></div>
+      <main class="main">
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="bookmarks">
+          <div class="tabs" id="tab-buttons" role="tablist"></div>
+          <div class="links" id="tab-links" role="tabpanel"></div>
+        </div>
+      </main>
     </div>
 
     <!-- JSON Config -->
