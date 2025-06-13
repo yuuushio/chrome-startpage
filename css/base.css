@@ -69,10 +69,22 @@ html[data-active-tab="3"] .tabs button[data-tab-btn="3"] {
 }
 
 /* Highlight active link group box */
-html[data-active-tab="1"] .links:has(a[data-tab="1"]:first-child),
-html[data-active-tab="2"] .links:has(a[data-tab="2"]:first-child),
-html[data-active-tab="3"] .links:has(a[data-tab="3"]:first-child) {
-  background: var(--link-box-active-bg);
+/* html[data-active-tab="1"] .links:has(a[data-tab="1"]:first-child), */
+/* html[data-active-tab="2"] .links:has(a[data-tab="2"]:first-child), */
+/* html[data-active-tab="3"] .links:has(a[data-tab="3"]:first-child) { */
+/*   background: var(--link-box-active-bg); */
+/* } */
+
+html[data-active-tab="1"] .links {
+  background: var(--link-box-bg-1);
+}
+
+html[data-active-tab="2"] .links {
+  background: var(--link-box-bg-2);
+}
+
+html[data-active-tab="3"] .links {
+  background: var(--link-box-bg-3);
 }
 
 .links a {
