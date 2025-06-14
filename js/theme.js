@@ -187,7 +187,8 @@ function startClocks() {
 const tzMap = JSON.parse(document.getElementById('timezone-config').textContent);
 
   const config = getTimezonesConfig();
-  const sidebar = document.querySelector('.sidebar-top');
+  // const sidebar = document.querySelector('.sidebar-top');
+  const sidebar = document.querySelector('.clock-container');
   if (!sidebar) return;
 
   const clocks = [];
