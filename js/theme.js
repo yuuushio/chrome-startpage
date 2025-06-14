@@ -124,25 +124,32 @@ function createClockCanvas(id, label) {
 
 function drawClock(ctx, tzOffsetMinutes) {
 
+        const styles = getComputedStyle(document.documentElement);
+
+
   const now = new Date(Date.now() + tzOffsetMinutes * 60 * 60 * 1000);
   const sec = now.getUTCSeconds();
   const min = now.getUTCMinutes();
   const hr = now.getUTCHours() % 12;
 
-const radius = 60;
+const radius = 40;
   ctx.clearRect(0, 0, radius * 2, radius * 2);
 
   // Clock face
   ctx.beginPath();
   ctx.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
-  ctx.fillStyle = '#f9f9f9';
+  ctx.fillStyle = styles.getPropertyValue('--base00').trim() || '#f9f9f9';
   ctx.fill();
-  ctx.strokeStyle = '#000';
+        const timeTicksColor = styles.getPropertyValue('--base03').trim() || '#000';
+        const handColor = styles.getPropertyValue('--base04').trim() || '#000';
+
+        const secStrokeColor = styles.getPropertyValue('--p1').trim() || '#000';
+  ctx.strokeStyle = timeTicksColor
   ctx.lineWidth = 2;
   ctx.stroke();
 
   // Tick marks
-  ctx.strokeStyle = '#000';
+  ctx.strokeStyle = timeTicksColor;
   for (let i = 0; i < 12; i++) {
     const angle = (i * Math.PI) / 6;
     const x1 = radius + Math.cos(angle) * (radius - 10);
@@ -170,9 +177,9 @@ const radius = 60;
     ctx.stroke();
   };
 
-  drawHand(toAngle(hr + min / 60, 12), radius * 0.5, 4, '#000');
-  drawHand(toAngle(min + sec / 60, 60), radius * 0.7, 3, '#000');
-  drawHand(toAngle(sec, 60), radius * 0.8, 1, '#f00');
+  drawHand(toAngle(hr + min / 60, 12), radius * 0.5, 4, handColor);
+  drawHand(toAngle(min + sec / 60, 60), radius * 0.7, 3, handColor);
+  drawHand(toAngle(sec, 60), radius * 0.8, 1, secStrokeColor);
 }
 
 function startClocks() {
