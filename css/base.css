@@ -162,7 +162,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 }
 
 .bookmarks {
-  background: var(--link-box-bg);
+  background: var(--background);
   padding: 1rem;
   border-radius: 6px;
 }

@@ -15,12 +15,13 @@
         <div class="sidebar-top">time / date / weather / etc.</div>
         <div class="sidebar-image">
           <!-- you can use <img> or a div with background-image -->
-          <img src="your-image.png" id="theme-image" alt="aesthetic" />
+          <img id="theme-image" alt="aesthetic" />
         </div>
         <div class="sidebar-bottom">
           <select id="theme-selector">
             <option value="default">Default</option>
             <option value="solarized-dark">Solarized Dark</option>
+            <option value="gruvbox">Gruvbox</option>
           </select>
         </div>
       </aside>
@@ -66,14 +67,14 @@
     <script id="theme-image-map" type="application/json">
       {
         "default": { "src": "images/default.png", "height": "300px" },
-        "solarized-dark": { "src": "images/default.png", "height": "240px" }
+        "solarized-dark": { "src": "images/default.png", "height": "240px" },
+        "gruvbox": { "src": "images/default.png", "height": "240px" }
       }
     </script>
     <script id="timezone-config" type="application/json">
       {
-        "british-columbia": { "label": "BC", "offset": -7 },
         "sydney": { "label": "Sydney", "offset": 10 },
-        "new-york": { "label": "NY", "offset": -4 }
+        "british-columbia": { "label": "BC", "offset": -7 }
       }
     </script>
     <script src="js/theme.js"></script>
