@@ -93,68 +93,112 @@ function activateTab(tab) {
     });
   }
 
-function drawClock(context, radius, offsetHours = 0) {
-  context.clearRect(0, 0, radius * 2, radius * 2);
+function getTimezonesConfig() {
+  const configEl = document.getElementById('timezone-config');
+  if (!configEl) return {};
+  try {
+    return JSON.parse(configEl.textContent);
+  } catch (e) {
+    console.error('[clock] invalid timezone config');
+    return {};
+  }
+}
 
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const local = new Date(utc + offsetHours * 3600000);
+function createClockCanvas(id, label) {
+  const container = document.createElement('div');
+  container.className = 'clock-block';
 
-  const sec = local.getSeconds();
-  const min = local.getMinutes();
-  const hr = local.getHours() % 12;
+  const canvas = document.createElement('canvas');
+  canvas.id = `clock-${id}`;
+  canvas.width = 120;
+  canvas.height = 120;
 
-  // clock face
-  context.beginPath();
-  context.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
-  context.fillStyle = '#f9f9f9';
-  context.fill();
-  context.strokeStyle = '#000';
-  context.lineWidth = 2;
-  context.stroke();
+  const caption = document.createElement('div');
+  caption.className = 'clock-label';
+  caption.textContent = label;
 
-  // tick marks
+  container.appendChild(canvas);
+  container.appendChild(caption);
+  return { container, canvas };
+}
+
+function drawClock(ctx, tzOffsetMinutes) {
+
+  const now = new Date(Date.now() + tzOffsetMinutes * 60 * 60 * 1000);
+  const sec = now.getUTCSeconds();
+  const min = now.getUTCMinutes();
+  const hr = now.getUTCHours() % 12;
+
+const radius = 60;
+  ctx.clearRect(0, 0, radius * 2, radius * 2);
+
+  // Clock face
+  ctx.beginPath();
+  ctx.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
+  ctx.fillStyle = '#f9f9f9';
+  ctx.fill();
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Tick marks
+  ctx.strokeStyle = '#000';
   for (let i = 0; i < 12; i++) {
     const angle = (i * Math.PI) / 6;
     const x1 = radius + Math.cos(angle) * (radius - 10);
     const y1 = radius + Math.sin(angle) * (radius - 10);
     const x2 = radius + Math.cos(angle) * (radius - 4);
     const y2 = radius + Math.sin(angle) * (radius - 4);
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
   }
 
-  // hands
   const toAngle = (unit, max) => (Math.PI * 2 * unit) / max - Math.PI / 2;
 
-  const drawHand = (angle, length, width) => {
-    context.beginPath();
-    context.lineWidth = width;
-    context.lineCap = 'round';
-    context.moveTo(radius, radius);
-    context.lineTo(
+  const drawHand = (angle, length, width, color) => {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = color;
+    ctx.moveTo(radius, radius);
+    ctx.lineTo(
       radius + Math.cos(angle) * length,
       radius + Math.sin(angle) * length
     );
-    context.stroke();
+    ctx.stroke();
   };
 
-  drawHand(toAngle(hr + min / 60, 12), radius * 0.5, 4);
-  drawHand(toAngle(min + sec / 60, 60), radius * 0.7, 3);
-  drawHand(toAngle(sec, 60), radius * 0.8, 1);
+  drawHand(toAngle(hr + min / 60, 12), radius * 0.5, 4, '#000');
+  drawHand(toAngle(min + sec / 60, 60), radius * 0.7, 3, '#000');
+  drawHand(toAngle(sec, 60), radius * 0.8, 1, '#f00');
 }
 
-function initAnalogClock() {
-  const canvas = document.getElementById('clock-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const radius = canvas.width / 2;
+function startClocks() {
 
-  // draw immediately, then every second
-  drawClock(ctx, radius);
-  setInterval(() => drawClock(ctx, radius), 1000);
+const tzMap = JSON.parse(document.getElementById('timezone-config').textContent);
+
+  const config = getTimezonesConfig();
+  const sidebar = document.querySelector('.sidebar-top');
+  if (!sidebar) return;
+
+  const clocks = [];
+
+  Object.entries(config).forEach(([key, enabled]) => {
+    if (!enabled || !tzMap[key]) return;
+    const { container, canvas } = createClockCanvas(key, tzMap[key].label);
+    sidebar.appendChild(container);
+    const ctx = canvas.getContext('2d');
+    clocks.push({ ctx, offset: tzMap[key].offset });
+  });
+
+  function tick() {
+    clocks.forEach(c => drawClock(c.ctx, c.offset));
+    requestAnimationFrame(tick);
+  }
+
+  tick();
 }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -162,6 +206,6 @@ function initAnalogClock() {
     renderBookmarks(data);
     initTabs();
     initTheme();
-        initAnalogClock();
+        startClocks();
   });
 })();
