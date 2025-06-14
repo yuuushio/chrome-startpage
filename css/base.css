@@ -96,7 +96,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .sidebar-top,
 .sidebar-bottom {
   padding: 0.5rem;
-  background: var(--link-box-bg);
+  background: grey;
   border-radius: 6px;
   text-align: center;
   font-family: monospace;
@@ -173,7 +173,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   gap: 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 1rem 0;
+  padding: 1rem;
 }
 
 .clock-block {

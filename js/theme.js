@@ -110,8 +110,8 @@ function createClockCanvas(id, label) {
 
   const canvas = document.createElement('canvas');
   canvas.id = `clock-${id}`;
-  canvas.width = 120;
-  canvas.height = 120;
+  canvas.width = 90;
+  canvas.height = 90;
 
   const caption = document.createElement('div');
   caption.className = 'clock-label';
@@ -132,8 +132,10 @@ function drawClock(ctx, tzOffsetMinutes) {
   const min = now.getUTCMinutes();
   const hr = now.getUTCHours() % 12;
 
-const radius = 40;
-  ctx.clearRect(0, 0, radius * 2, radius * 2);
+        const size = ctx.canvas.width;
+
+const radius = size/2;
+  ctx.clearRect(0, 0, size, size);
 
   // Clock face
   ctx.beginPath();
