@@ -256,3 +256,32 @@ background: linear-gradient(145deg,
   font-size: 0.9rem;
   color: var(--fg);
 }
+
+select {
+  appearance: none;
+  background-color: var(--bg);
+  color: var(--p8);
+  border: 1px solid color-mix(in srgb, var(--fg) 5%, var(--bg) 95%);
+  padding: 0.4rem 2.2rem 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 0.2rem;
+  font-family: inherit;
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 0.6rem center, 0 0;
+  background-size: 0.6rem 0.6rem, 100% 100%;
+  cursor: pointer;
+  outline: none;
+
+  color: color-mix(in srgb, var(--bg) 95%, var(--fg) 25%);
+  background-color: color-mix(in srgb, var(--bg) 95%, var(--fg) 1%);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--bg);
+}
+
+select:hover {
+  background-color: color-mix(in srgb, var(--bg) 92%, var(--fg) 8%);
+}
