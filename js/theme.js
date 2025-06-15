@@ -18,6 +18,24 @@
   const loadedThemes = new Set();
   let TAB_LIST = [];
 
+  function scale(hex, k) {
+    // k = 0.92, 1.08, 0.67, 1.33
+    let n = parseInt(hex.slice(1), 16); // strip leading ‘#’
+    const r = Math.min(255, Math.round(((n >> 16) & 255) * k));
+    const g = Math.min(255, Math.round(((n >> 8) & 255) * k));
+    const b = Math.min(255, Math.round((n & 255) * k));
+    return "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+  }
+
+  function neumorphColours(base) {
+    return {
+      gradDark: scale(base, 0.92), // –8 %
+      gradLight: scale(base, 1.08), // +8 %
+      shadowDark: scale(base, 0.67), // –33 %
+      shadowLite: scale(base, 1.33), // +33 %
+    };
+  }
+
   const hexToRgb = (h) => {
     h = h.replace(/^#/, "");
     if (h.length === 3) h = h.replace(/./g, (m) => m + m); // #abc → #aabbcc
@@ -81,10 +99,16 @@
   const lighten = (hex, pct) => _shift(hex, +pct); // +pct points
   const darken = (hex, pct) => _shift(hex, -pct); // –pct points
 
-  /*  --------  usage  -------------------------------------------------------  */
-  // lighten('#6699cc', 10)  → '#79a6d4' (matches Sass)
-  // darken ('#6699cc', 10)  → '#5386c4'
+  function applyNeumorphColours() {
+    // Matches neumorphism.io defaults
+    const base = getComputedStyle(root).getPropertyValue("--bg").trim();
+    const c = neumorphColours(base);
 
+    root.style.setProperty("--neu-grad-dark", c.gradDark);
+    root.style.setProperty("--neu-grad-light", c.gradLight);
+    root.style.setProperty("--neu-shadow-dark", c.shadowDark);
+    root.style.setProperty("--neu-shadow-lite", c.shadowLite);
+  }
   function loadThemeCSS(theme) {
     if (loadedThemes.has(theme)) return;
     const link = document.createElement("link");
@@ -108,6 +132,8 @@
     if (!THEMES.includes(theme)) return;
     THEMES.forEach((t) => root.classList.remove(`theme-${t}`));
     root.classList.add(`theme-${theme}`);
+
+    applyNeumorphColours();
 
     if (imageEl && imageConfig[theme]) {
       const { src, height } = imageConfig[theme];
