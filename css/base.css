@@ -25,7 +25,7 @@ select {
 
 .tabs button {
   background: none;
-  color: var(--fg);
+  color: var(--p8);
   border: none;
   padding: 0.5rem 1rem;
   font: inherit;
@@ -34,8 +34,8 @@ select {
   outline: none;
   position: relative;
   /* margin: 0.0rem; */
-  border-radius: 0.8rem;
-  /* border: 1px solid var(--base00); */
+  border-radius: 0.1rem;
+  border: 1px solid transparent;
 }
 
 .tabs button:focus-visible {
@@ -44,11 +44,10 @@ select {
 
 .tabs button.is-active {
   /* background: var(--base01); */
-  color: var(--p2);
-  filter: brightness(55%);
-  border: 1px solid color-mix(in srgb, var(--bg) 90%, white 10%);
-  background: rgba(255, 255, 255, 0.04);
-  /* font-weight: bold; */
+  color: var(--fg);
+  border: 1px solid color-mix(in srgb, var(--bg) 95%, white 5%);
+  /* border-bottom: 1px solid color-mix(in srgb, var(--p6) 90%, var(--bg) 85%); */
+  background: color-mix(in srgb, var(--p8) 5%, var(--bg) 10%);
 }
 
 .bookmarks {
@@ -56,9 +55,9 @@ select {
   background: color-mix(in srgb, var(--bg) 90%, black 10%);
   margin-left: 1rem;
   margin-top: 1rem;
-  /* border: 1px solid var(--p2); */
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 0.5rem;
-  /* border-radius: 0.8rem; */
+  border-radius: 0.1rem;
   /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
 }
 
@@ -113,12 +112,20 @@ html[data-active-tab] .links a[data-tab].is-visible {
 
 .sidebar-top,
 .sidebar-bottom {
-  padding: 0.5rem;
-  background: grey;
-  border-radius: 6px;
   text-align: center;
   font-family: monospace;
   font-size: 0.9rem;
+
+}
+
+.sidebar-top {
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--p8);
+border-radius: 13px;
+background: linear-gradient(145deg, #001b23, #00202a);
+box-shadow:  5px 5px 7px #00141b,
+             -5px -5px 7px #002833;5px 7px #002833;
 }
 
 .sidebar-image {
