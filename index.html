@@ -9,10 +9,13 @@
     <!-- themes are loaded dynamically -->
   </head>
   <body>
-    <h1>Start Page</h1>
     <div class="container">
       <aside class="sidebar">
-        <div class="sidebar-top">time / date / weather / etc.</div>
+        <div class="sidebar-top">
+          <p id="time"></p>
+          <p id="date"></p>
+          <p id="weather"></p>
+        </div>
         <div class="sidebar-image">
           <!-- you can use <img> or a div with background-image -->
           <img id="theme-image" alt="aesthetic" />
@@ -67,8 +70,8 @@
     <script id="theme-image-map" type="application/json">
       {
         "default": { "src": "images/default.png", "height": "300px" },
-        "solarized-dark": { "src": "images/default.png", "height": "240px" },
-        "gruvbox": { "src": "images/default.png", "height": "240px" }
+        "solarized-dark": { "src": "images/default.png", "height": "300px" },
+        "gruvbox": { "src": "images/default.png", "height": "300px" }
       }
     </script>
     <script id="timezone-config" type="application/json">
