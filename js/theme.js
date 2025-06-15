@@ -16,6 +16,66 @@ const imageEl = document.getElementById('theme-image');
   const loadedThemes = new Set();
   let TAB_LIST = [];
 
+const hexToRgb = h => {
+  h = h.replace(/^#/, '');
+  if (h.length === 3) h = h.replace(/./g, m => m + m);             // #abc → #aabbcc
+  const n = parseInt(h, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];               // [r,g,b] 0–255
+};
+
+const rgbToHex = ([r, g, b]) =>
+  '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+
+/* ITU-BT.601 constants; same weighting Sass uses internally */
+const rgbToHsl = ([r, g, b]) => {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, l * 100];
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  const h =
+    max === r ? (g - b) / d + (g < b ? 6 : 0) :
+    max === g ? (b - r) / d + 2 :
+                (r - g) / d + 4;
+  return [h * 60, s * 100, l * 100];                               // [h° 0-360, s%, l%]
+};
+
+const hslToRgb = ([h, s, l]) => {
+  h /= 360; s /= 100; l /= 100;
+  if (s === 0) {                                                   // achromatic
+    const v = Math.round(l * 255);
+    return [v, v, v];
+  }
+  const hue2rgb = (p, q, t) => {
+    t = (t + 1) % 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+  };
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  const p = 2 * l - q;
+  const r = hue2rgb(p, q, h + 1/3);
+  const g = hue2rgb(p, q, h);
+  const b = hue2rgb(p, q, h - 1/3);
+  return [r, g, b].map(v => Math.round(v * 255));
+};
+
+/*  --------  public API  --------------------------------------------------  */
+const _shift = (hex, pct) => {
+  const hsl = rgbToHsl(hexToRgb(hex));
+  hsl[2] = Math.max(0, Math.min(100, hsl[2] + pct));               // clamp L*
+  return rgbToHex(hslToRgb(hsl));
+};
+
+export const lighten = (hex, pct) => _shift(hex, +pct);            // +pct points
+export const darken  = (hex, pct) => _shift(hex, -pct);            // –pct points
+
+/*  --------  usage  -------------------------------------------------------  */
+// lighten('#6699cc', 10)  → '#79a6d4' (matches Sass)
+// darken ('#6699cc', 10)  → '#5386c4'
+
   function loadThemeCSS(theme) {
     if (loadedThemes.has(theme)) return;
     const link = document.createElement('link');
@@ -37,6 +97,7 @@ if (imageEl && imageConfig[theme]) {
 }
     localStorage.setItem(THEME_KEY, theme);
   }
+
 
   function initTheme() {
     const saved = localStorage.getItem(THEME_KEY) || THEMES[0];
