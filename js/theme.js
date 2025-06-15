@@ -111,11 +111,18 @@
   }
   function loadThemeCSS(theme) {
     if (loadedThemes.has(theme)) return;
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = `${themeDir}/theme.${theme}.css`;
-    link.onload = () => loadedThemes.add(theme);
-    document.head.appendChild(link);
+    if (loadedThemes.has(theme)) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `${themeDir}/theme.${theme}.css`;
+      link.onload = () => {
+        loadedThemes.add(theme);
+        resolve();
+      };
+      link.onerror = reject;
+      document.head.appendChild(link);
+    });
   }
   function applyDarkenedBg(selector, cssVar, amount) {
     const base = getComputedStyle(document.documentElement)
@@ -133,7 +140,8 @@
     THEMES.forEach((t) => root.classList.remove(`theme-${t}`));
     root.classList.add(`theme-${theme}`);
 
-    applyNeumorphColours();
+    // applyNeumorphColours();
+    loadThemeCSS(theme).then(applyNeumorphColours);
 
     if (imageEl && imageConfig[theme]) {
       const { src, height } = imageConfig[theme];
