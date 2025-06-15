@@ -30,9 +30,12 @@ select {
   padding: 0.5rem 1rem;
   font: inherit;
   cursor: pointer;
-  border-radius: 0.4rem 0.4rem 0 0;
+  /* border-radius: 0.4rem 0.4rem 0 0; */
   outline: none;
   position: relative;
+  /* margin: 0.0rem; */
+  border-radius: 0.8rem;
+  border: 1px solid var(--base00);
 }
 
 .tabs button:focus-visible {
@@ -40,15 +43,28 @@ select {
 }
 
 .tabs button.is-active {
-  background: var(--base02);
-  color: var(--p5);
-  font-weight: bold;
+  /* background: var(--base01); */
+  color: var(--p2);
+  filter: brightness(55%);
+  /* border: 1px solid var(--base08); */
+  /* font-weight: bold; */
+}
+
+.bookmarks {
+  background: var(--background);
+  margin-left: 1rem;
+  margin-top: 1rem;
+  /* border: 1px solid var(--p2); */
+  padding: 0.5rem;
+  /* border-radius: 0.8rem; */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
 .links {
-  padding: 1rem;
+  padding: 0.5rem;
+  padding-left: 0.6rem;
   border-radius: 0 0 0.4rem 0.4rem;
-  background: var(--base02);
+  /* background: var(--base02); */
   transition: background 0.2s ease;
 }
 
@@ -159,12 +175,6 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .prompt-input::placeholder {
   color: #555;
   font-style: italic;
-}
-
-.bookmarks {
-  background: var(--background);
-  padding: 1rem;
-  border-radius: 6px;
 }
 
 .clock-container {

@@ -211,6 +211,7 @@ const tzMap = JSON.parse(document.getElementById('timezone-config').textContent)
   tick();
 }
 
+
   document.addEventListener('DOMContentLoaded', () => {
     const data = JSON.parse(bookmarkData.textContent);
     renderBookmarks(data);
