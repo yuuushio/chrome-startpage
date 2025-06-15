@@ -68,9 +68,8 @@ const _shift = (hex, pct) => {
   hsl[2] = Math.max(0, Math.min(100, hsl[2] + pct));               // clamp L*
   return rgbToHex(hslToRgb(hsl));
 };
-
-export const lighten = (hex, pct) => _shift(hex, +pct);            // +pct points
-export const darken  = (hex, pct) => _shift(hex, -pct);            // –pct points
+const lighten = (hex, pct) => _shift(hex, +pct); // +pct points
+const darken  = (hex, pct) => _shift(hex, -pct); // –pct points
 
 /*  --------  usage  -------------------------------------------------------  */
 // lighten('#6699cc', 10)  → '#79a6d4' (matches Sass)
@@ -84,6 +83,14 @@ export const darken  = (hex, pct) => _shift(hex, -pct);            // –pct poi
     link.onload = () => loadedThemes.add(theme);
     document.head.appendChild(link);
   }
+function applyDarkenedBg(selector, cssVar, amount) {
+  const base = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim();
+  if (!base) return;
+  const darker = darken(base, amount);
+  document.querySelectorAll(selector).forEach(el => {
+    el.style.backgroundColor = darker;
+  });
+}
 
   function setTheme(theme) {
     if (!THEMES.includes(theme)) return;
@@ -94,7 +101,6 @@ if (imageEl && imageConfig[theme]) {
   const { src, height } = imageConfig[theme];
   imageEl.src = src;
   imageEl.style.height = height;
-}
     localStorage.setItem(THEME_KEY, theme);
   }
 

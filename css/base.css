@@ -1,11 +1,11 @@
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --bg: #ffffff;
+  --fg: #000000;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--fg);
   margin: 0;
   padding: 2rem;
   font-family: sans-serif;
@@ -25,7 +25,7 @@ select {
 
 .tabs button {
   background: none;
-  color: var(--foreground);
+  color: var(--fg);
   border: none;
   padding: 0.5rem 1rem;
   font: inherit;
@@ -35,7 +35,7 @@ select {
   position: relative;
   /* margin: 0.0rem; */
   border-radius: 0.8rem;
-  border: 1px solid var(--base00);
+  /* border: 1px solid var(--base00); */
 }
 
 .tabs button:focus-visible {
@@ -46,18 +46,20 @@ select {
   /* background: var(--base01); */
   color: var(--p2);
   filter: brightness(55%);
-  /* border: 1px solid var(--base08); */
+  border: 1px solid color-mix(in srgb, var(--bg) 90%, white 10%);
+  background: rgba(255, 255, 255, 0.04);
   /* font-weight: bold; */
 }
 
 .bookmarks {
-  background: var(--background);
+  /* background: var(--background); */
+  background: color-mix(in srgb, var(--bg) 90%, black 10%);
   margin-left: 1rem;
   margin-top: 1rem;
   /* border: 1px solid var(--p2); */
   padding: 0.5rem;
   /* border-radius: 0.8rem; */
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
 }
 
 .links {
@@ -72,7 +74,7 @@ select {
   display: none;
   margin: 0.25rem 0;
   text-decoration: none;
-  color: var(--foreground);
+  color: var(--fg);
 }
 
 .links a[data-tab] {
@@ -202,5 +204,5 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .clock-label {
   margin-top: 0.25rem;
   font-size: 0.9rem;
-  color: var(--foreground);
+  color: var(--fg);
 }
