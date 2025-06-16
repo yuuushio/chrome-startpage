@@ -15,102 +15,39 @@
     document.getElementById("theme-image-map").textContent,
   );
   const imageEl = document.getElementById("theme-image");
+  let currentTheme = null;
   const loadedThemes = new Set();
   let TAB_LIST = [];
 
-  function scale(hex, k) {
-    // k = 0.92, 1.08, 0.67, 1.33
-    let n = parseInt(hex.slice(1), 16); // strip leading ‘#’
-    const r = Math.min(255, Math.round(((n >> 16) & 255) * k));
-    const g = Math.min(255, Math.round(((n >> 8) & 255) * k));
-    const b = Math.min(255, Math.round((n & 255) * k));
+  const scale = (hex, k) => {
+    // 3 mults, 3 clamps, branchless
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, ((n >> 16) & 255) * k) | 0;
+    const g = Math.min(255, ((n >> 8) & 255) * k) | 0;
+    const b = Math.min(255, (n & 255) * k) | 0;
     return "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
-  }
-
-  function neumorphColours(base) {
-    return {
-      gradDark: scale(base, 0.92), // –8 %
-      gradLight: scale(base, 1.08), // +8 %
-      shadowDark: scale(base, 0.67), // –33 %
-      shadowLite: scale(base, 1.33), // +33 %
-    };
-  }
-
-  const hexToRgb = (h) => {
-    h = h.replace(/^#/, "");
-    if (h.length === 3) h = h.replace(/./g, (m) => m + m); // #abc → #aabbcc
-    const n = parseInt(h, 16);
-    return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; // [r,g,b] 0–255
   };
 
-  const rgbToHex = ([r, g, b]) =>
-    "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+  const neumorph = (b) => ({
+    gradDark: scale(b, 0.92),
+    gradLight: scale(b, 1.08),
+    shadowDark: scale(b, 0.67),
+    shadowLite: scale(b, 1.33),
+  });
 
-  /* ITU-BT.601 constants; same weighting Sass uses internally */
-  const rgbToHsl = ([r, g, b]) => {
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    const max = Math.max(r, g, b),
-      min = Math.min(r, g, b);
-    const l = (max + min) / 2;
-    if (max === min) return [0, 0, l * 100];
-    const d = max - min;
-    const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    const h =
-      max === r
-        ? (g - b) / d + (g < b ? 6 : 0)
-        : max === g
-          ? (b - r) / d + 2
-          : (r - g) / d + 4;
-    return [h * 60, s * 100, l * 100]; // [h° 0-360, s%, l%]
-  };
-
-  const hslToRgb = ([h, s, l]) => {
-    h /= 360;
-    s /= 100;
-    l /= 100;
-    if (s === 0) {
-      // achromatic
-      const v = Math.round(l * 255);
-      return [v, v, v];
-    }
-    const hue2rgb = (p, q, t) => {
-      t = (t + 1) % 1;
-      if (t < 1 / 6) return p + (q - p) * 6 * t;
-      if (t < 1 / 2) return q;
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-      return p;
-    };
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    const r = hue2rgb(p, q, h + 1 / 3);
-    const g = hue2rgb(p, q, h);
-    const b = hue2rgb(p, q, h - 1 / 3);
-    return [r, g, b].map((v) => Math.round(v * 255));
-  };
-
-  /*  --------  public API  --------------------------------------------------  */
-  const _shift = (hex, pct) => {
-    const hsl = rgbToHsl(hexToRgb(hex));
-    hsl[2] = Math.max(0, Math.min(100, hsl[2] + pct)); // clamp L*
-    return rgbToHex(hslToRgb(hsl));
-  };
-  const lighten = (hex, pct) => _shift(hex, +pct); // +pct points
-  const darken = (hex, pct) => _shift(hex, -pct); // –pct points
-
-  function applyNeumorphColours() {
+  function applyNeumorph() {
     // Matches neumorphism.io defaults
     const base = getComputedStyle(root).getPropertyValue("--bg").trim();
-    const c = neumorphColours(base);
+    const c = neumorph(base);
 
     root.style.setProperty("--neu-grad-dark", c.gradDark);
     root.style.setProperty("--neu-grad-light", c.gradLight);
     root.style.setProperty("--neu-shadow-dark", c.shadowDark);
     root.style.setProperty("--neu-shadow-lite", c.shadowLite);
   }
-  function loadThemeCSS(theme) {
-    if (loadedThemes.has(theme)) return;
+
+  function loadThemeSheet(theme) {
+    // if (loadedThemes.has(theme)) return;
     if (loadedThemes.has(theme)) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const link = document.createElement("link");
@@ -136,12 +73,20 @@
   }
 
   function setTheme(theme) {
-    if (!THEMES.includes(theme)) return;
+    if (!THEMES.includes(theme) || theme === currentTheme) return;
+
+    currentTheme = theme;
+
     THEMES.forEach((t) => root.classList.remove(`theme-${t}`));
-    root.classList.add(`theme-${theme}`);
+    root.className = `theme-${theme}`;
+    // root.classList.add(`theme-${theme}`);
 
     // applyNeumorphColours();
-    loadThemeCSS(theme).then(applyNeumorphColours);
+    // loadThemeCSS(theme).then(applyNeumorphColours);
+    loadThemeSheet(theme).then(() => {
+      //  order enforced here
+      if (theme === currentTheme) applyNeumorph(); //  ignore stale loads
+    });
 
     if (imageEl && imageConfig[theme]) {
       const { src, height } = imageConfig[theme];
@@ -153,12 +98,14 @@
 
   function initTheme() {
     const saved = localStorage.getItem(THEME_KEY) || THEMES[0];
-    loadThemeCSS(saved);
+    const selector = document.getElementById("theme-selector");
+    selector.value = saved;
+    // loadThemeSheet(saved);
     setTheme(saved);
-    if (themeSelector) themeSelector.value = saved;
-    themeSelector?.addEventListener("change", (e) => {
+    // if (themeSelector) themeSelector.value = saved;
+    selector.addEventListener("change", (e) => {
       const theme = e.target.value;
-      loadThemeCSS(theme);
+      loadThemeSheet(theme);
       setTheme(theme);
     });
   }
@@ -355,9 +302,9 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const data = JSON.parse(bookmarkData.textContent);
+    initTheme();
     renderBookmarks(data);
     initTabs();
-    initTheme();
     startClocks();
     updateTime(); // initialize immediately
     setInterval(updateTime, 1000);
