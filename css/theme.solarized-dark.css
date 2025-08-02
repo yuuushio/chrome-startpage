@@ -1,4 +1,7 @@
 html.theme-solarized-dark {
+  --dark6: #00151b;
+  --dark2: #001b23; /* clock bg */
+  --dark1: #001c25;
   --base00: #002b36;
   --base01: #06313c;
   --base02: #0a3540;

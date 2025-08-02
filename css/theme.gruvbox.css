@@ -1,4 +1,7 @@
 html.theme-gruvbox {
+  --dark6: #1c1c1c;
+  --dark2: #242424;
+  --dark1: #262626;
   --base00: #282828;
   --base01: #3c3836;
   --base02: #423e3c;

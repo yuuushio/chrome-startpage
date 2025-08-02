@@ -206,7 +206,7 @@
     // Clock face
     ctx.beginPath();
     ctx.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
-    ctx.fillStyle = styles.getPropertyValue("--base00").trim() || "#f9f9f9";
+    ctx.fillStyle = styles.getPropertyValue("--dark2").trim() || "#f9f9f9";
     ctx.fill();
     const timeTicksColor = styles.getPropertyValue("--base03").trim() || "#000";
     const handColor = styles.getPropertyValue("--base04").trim() || "#000";
