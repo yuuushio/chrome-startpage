@@ -1,4 +1,5 @@
 :root {
+  --search-pad: 1rem;
   --bg: #ffffff;
   --fg: #000000;
 }
@@ -40,8 +41,9 @@ select {
   position: relative;
   /* margin: 0.0rem; */
   border-radius: 0;
-  border: 2px solid var(dark6);
+  border: 2px solid var(--dark6);
   background-color: var(--fg);
+  background-clip: padding-box;
 }
 
 .tabs button:focus-visible {
@@ -52,19 +54,21 @@ select {
   opacity: 100%;
   /* background: var(--base01); */
   color: var(--bg);
-  border: 2px solid var(dark6);
+  border: 2px solid var(--dark6);
   /* border-bottom: 1px solid color-mix(in srgb, var(--p6) 90%, var(--bg) 85%); */
-  background: var(--p3);
+  background: var(--bm-active);
+
+  background-clip: padding-box;
 }
 
 .bookmarks {
   position: relative;
   margin-left: 1rem;
-  margin-top: 1rem;
-  border: 1px solid var(--p4);
+  margin-top: 2.5rem;
+  border: 0.15rem solid var(--bm-border);
   padding: 1rem;
   padding-top: 2rem;
-  border-radius: 0.15rem;
+  border-radius: 0.05rem;
   background-color: var(--dark1);
 }
 
@@ -107,6 +111,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   margin: 0 auto;
   padding: 2rem;
   align-items: start;
+  margin-top: 2rem;
 }
 
 /* Sidebar layout */
@@ -155,8 +160,8 @@ html[data-active-tab] .links a[data-tab].is-visible {
     var(--neu-grad-light)
   );
   box-shadow:
-    4px 4px 6px var(--neu-shadow-dark),
-    -4px -4px 6px var(--neu-shadow-lite);
+    2px 2px 6px var(--neu-shadow-dark),
+    -1px -1px 8px var(--neu-shadow-lite);
 }
 
 .sidebar-image {
@@ -174,15 +179,15 @@ html[data-active-tab] .links a[data-tab].is-visible {
     var(--neu-grad-light)
   );
   box-shadow:
-    4px 4px 6px var(--neu-shadow-dark),
-    -4px -4px 6px var(--neu-shadow-lite);
+    2px 2px 10px var(--neu-shadow-dark),
+    -2px -2px 10px var(--neu-shadow-lite);
 }
 
 .sidebar-top-date {
   font-size: 0.8rem;
   opacity: 0.7;
   color: var(--p8);
-  dispaly: flex;
+  display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -201,7 +206,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .main {
   display: flex;
   flex-direction: column;
-  margin-top: 4.4rem;
+  margin-top: 1.65rem;
   gap: 1rem;
 }
 
@@ -211,14 +216,15 @@ html[data-active-tab] .links a[data-tab].is-visible {
   background-color: var(--bg);
   margin-left: 1rem;
   margin-bottom: 1rem;
-  padding: 1.5rem;
+  padding: var(--search-pad);
   padding-left: 0;
   font-family: monospace;
   font-size: 1rem;
   color: var(--p4);
   height: 1rem;
-  border: 1px solid var(--base01);
+  border: 0.1rem solid var(--dark2);
   border-radius: 0.1rem;
+  background-color: var(--dark1);
   /* max-width: 20rem; */
   /* width: 100%; */
 }
@@ -226,10 +232,14 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .prompt-prefix-container {
   white-space: nowrap;
   /* margin-right: 0.5rem; */
-  padding: 1.5rem;
+  padding: var(--search-pad);
   user-select: none;
-  color: var(--p8);
-  border-right: 1px solid var(--base01);
+  color: var(--bg);
+  border-radius: 0.1rem;
+  opacity: 80%;
+  background-color: var(--p2);
+  border: 0.1rem solid var(--bg);
+  /* border-right: 0.1rem solid var(--bg); */
 }
 
 .search-prompt-element {
@@ -244,14 +254,14 @@ html[data-active-tab] .links a[data-tab].is-visible {
   font: inherit;
   width: 100%;
   font-size: 1.2rem;
-  height: 1.5rem;
+  padding: var(--search-pad);
   caret-color: var(--p4);
-  padding-left: 1.5rem;
+  padding: var(--search-pad);
 }
 
 .prompt-input::placeholder {
   color: var(--fg);
-  opacity: 20%;
+  opacity: 12%;
   font-style: italic;
 }
 
@@ -262,6 +272,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1rem;
+  margin-top: 2rem;
 }
 
 .clock-block {
