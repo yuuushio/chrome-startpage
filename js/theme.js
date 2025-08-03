@@ -172,56 +172,55 @@
 
   function stabilizeBookmarksHeight() {
     if (!linkContainer || !BOOKMARK_CONFIG.length) return;
-    // ensure current width is captured
     const containerWidth = linkContainer.clientWidth;
 
-    // create a single offscreen measurer
     const measurer = document.createElement("div");
-    // copy any classes that affect width/typography if needed; we only need layout classes per tab later
     measurer.style.position = "absolute";
     measurer.style.visibility = "hidden";
     measurer.style.top = "0";
     measurer.style.left = "-9999px";
     measurer.style.width = containerWidth + "px";
-    // ensure it uses same font/inheritance
     document.body.appendChild(measurer);
 
-    let maxH = 0;
+    let maxContentH = 0;
 
     BOOKMARK_CONFIG.forEach((tabObj) => {
       const tabId = String(tabObj.tab);
-      measurer.textContent = ""; // clear previous
-      // apply layout like in activateTab
-      measurer.className = ""; // reset
+      measurer.textContent = "";
+      measurer.className = "";
       const layoutClass =
         tabObj.layout === "row" ? "layout-row" : "layout-column";
       measurer.classList.add(layoutClass);
-      if (
-        tabObj.columns &&
-        Number.isInteger(tabObj.columns) &&
-        tabObj.columns > 0
-      ) {
-        measurer.style.setProperty("--col-count", tabObj.columns);
-      } else {
-        measurer.style.removeProperty("--col-count");
-      }
-      // inject clones of that tab's anchors
+      measurer.style.setProperty(
+        "--col-count",
+        getEffectiveColumnCount(tabObj),
+      );
+
       const anchors = tabLinkElements.get(tabId) || [];
       anchors.forEach((a) => {
         const c = a.cloneNode(true);
-        c.classList.add("is-visible"); // match visibility rules if your CSS relies on it
+        c.classList.add("is-visible");
         measurer.appendChild(c);
       });
-      // force style recalc before measuring
+
+      // force layout and measure
       const h = measurer.getBoundingClientRect().height;
-      if (h > maxH) maxH = h;
+      if (h > maxContentH) maxContentH = h;
     });
 
     document.body.removeChild(measurer);
-    if (maxH > 0) {
-      linkContainer.style.height = Math.ceil(maxH) + "px";
-      linkContainer.style.overflowY = "auto"; // optional: prevent overflow if content slightly grows
+
+    // account for linkContainer's own padding/border if content-box
+    const style = getComputedStyle(linkContainer);
+    let extra = 0;
+    if (style.boxSizing === "content-box") {
+      extra += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+      extra +=
+        parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
     }
+    const finalHeight = Math.ceil(maxContentH + extra);
+    linkContainer.style.height = finalHeight + "px";
+    linkContainer.style.overflowY = "auto";
   }
 
   function activateTab(tabId) {
@@ -452,7 +451,7 @@
     prepareBookmarkTemplate(BOOKMARK_CONFIG);
     initTheme();
     renderTabs();
-    stabilizeBookmarksHeight();
+    // stabilizeBookmarksHeight();
     initTabs();
     startClocks();
     updateTime(); // initialize immediately
@@ -463,7 +462,7 @@
     debounce(() => {
       // clear previously fixed height so measurement is accurate
       linkContainer.style.height = "";
-      stabilizeBookmarksHeight();
+      // stabilizeBookmarksHeight();
       // reapply current tab so visible links stay
       if (activeTabId) activateTab(activeTabId);
     }, 100),
