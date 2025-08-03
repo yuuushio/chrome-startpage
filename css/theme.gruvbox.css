@@ -37,6 +37,10 @@ html.theme-gruvbox {
   --p15: #ebdbb2;
   --bg: #282828;
   --fg: #ebdbb2;
+
+  --bm-active: var(--p4);
+  --bm-border: var(--p4);
+
   --cursor-color: #ebdbb2;
   --cursor-text: #282828;
   --selection-background: #665c54;

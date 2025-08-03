@@ -34,6 +34,10 @@ html.theme-default {
   --base0D: #c4a7e7;
   --base0E: #f6c177;
   --base0F: #524f67;
+
+  --bm-active: var(--p4);
+  --bm-border: var(--p4);
+
   --bg: #191724;
   --fg: #e0def4;
   --cursor-color: #e0def4;

@@ -7,7 +7,8 @@
   const linkContainer = document.getElementById("tab-links");
   const bookmarkData = document.getElementById("bookmark-data");
 
-  const THEMES = ["default", "solarized-dark", "gruvbox"];
+  // must match the html selector *values*
+  const THEMES = ["default", "solarized-dark", "gruvbox", "nord-dark"];
   const THEME_KEY = "theme";
   const TAB_KEY = "activeTab";
   const themeDir = "css/";

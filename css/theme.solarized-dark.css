@@ -36,6 +36,10 @@ html.theme-solarized-dark {
   --p15: #fcf4dc;
   --bg: #001e27;
   --fg: #708284;
+
+  --bm-active: var(--p4);
+  --bm-border: var(--p4);
+
   --cursor-color: #708284;
   --cursor-text: #002831;
   --selection-background: #002831;
