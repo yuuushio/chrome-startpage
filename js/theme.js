@@ -18,6 +18,9 @@
   let currentTheme = null;
   const loadedThemes = new Set();
   let TAB_LIST = [];
+  let BOOKMARK_CONFIG = []; // parsed array of tab objects
+  let activeTabId = null; // string like "1", "2", etc.
+  const tabLinkElements = new Map(); // tabId -> array of <a> elements (template)
 
   const scale = (hex, k) => {
     // 3 mults, 3 clamps, branchless
@@ -110,54 +113,123 @@
     });
   }
 
-  function renderBookmarks(json) {
-    const tabs = [],
-      links = [];
-    TAB_LIST = [];
-
-    json.forEach((group) => {
-      const tab = group.tab;
-      TAB_LIST.push(tab);
-      tabs.push(
-        `<button data-tab-btn="${tab}" role="tab" aria-selected="false">${group.label}</button>`,
-      );
-      group.links.forEach((link) =>
-        links.push(
-          `<a href="${link.url}" data-tab="${tab}" rel="noopener noreferrer">${link.name}</a>`,
-        ),
-      );
+  function prepareBookmarkTemplate(config) {
+    // Build anchor elements once per tab and stash them
+    config.forEach((group) => {
+      const tabId = String(group.tab);
+      const links = Array.isArray(group.links) ? group.links : [];
+      const anchors = links.map((ln) => {
+        const a = document.createElement("a");
+        a.href = ln.url || "#";
+        a.textContent = ln.name || ln.url || "";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.setAttribute("data-tab", tabId);
+        return a;
+      });
+      tabLinkElements.set(tabId, anchors);
     });
-
-    tabContainer.innerHTML = tabs.join("");
-    linkContainer.innerHTML = links.join("");
   }
 
-  function activateTab(tab) {
-    root.setAttribute("data-active-tab", tab);
-    localStorage.setItem(TAB_KEY, tab);
-
-    document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
-      btn.classList.toggle(
-        "is-active",
-        btn.getAttribute("data-tab-btn") === tab,
+  function renderTabs() {
+    tabContainer.textContent = "";
+    const frag = document.createDocumentFragment();
+    BOOKMARK_CONFIG.forEach((tabObj) => {
+      const tabId = String(tabObj.tab);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      // no dependency on .tab-button for your CSS; extra class is harmless if you keep it, but active is is-active
+      btn.setAttribute("data-tab-btn", tabId);
+      btn.setAttribute("role", "tab");
+      btn.setAttribute(
+        "aria-selected",
+        tabId === activeTabId ? "true" : "false",
       );
+      btn.textContent = tabObj.label || tabId;
+      if (tabId === activeTabId) btn.classList.add("is-active");
+      btn.addEventListener("click", () => {
+        if (activeTabId === tabId) return;
+        activateTab(tabId);
+        btn.focus();
+      });
+      frag.appendChild(btn);
+    });
+    tabContainer.appendChild(frag);
+  }
+
+  function activateTab(tabId) {
+    if (!tabLinkElements.has(String(tabId))) return;
+    activeTabId = String(tabId);
+    root.setAttribute("data-active-tab", activeTabId);
+    localStorage.setItem(TAB_KEY, activeTabId);
+
+    // buttons: toggle is-active
+    document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
+      const is = btn.getAttribute("data-tab-btn") === activeTabId;
+      btn.classList.toggle("is-active", is);
+      btn.setAttribute("aria-selected", is ? "true" : "false");
     });
 
-    document.querySelectorAll(".links a").forEach((link) => {
-      const match = link.getAttribute("data-tab") === tab;
-      link.classList.toggle("is-visible", match);
+    // links: rebuild container according to layout
+    const tabObj = BOOKMARK_CONFIG.find((t) => String(t.tab) === activeTabId);
+    if (!tabObj) return;
+
+    // layout handling (your CSS currently doesn’t define layout-row/column; safe to leave or add later)
+    linkContainer.classList.remove("layout-row", "layout-column");
+    const layout = tabObj.layout === "row" ? "layout-row" : "layout-column";
+    linkContainer.classList.add(layout);
+    if (
+      tabObj.columns &&
+      Number.isInteger(tabObj.columns) &&
+      tabObj.columns > 0
+    ) {
+      linkContainer.style.setProperty("--col-count", tabObj.columns);
+    } else {
+      linkContainer.style.removeProperty("--col-count");
+    }
+
+    // replace children and mark visible
+    const anchors = tabLinkElements.get(activeTabId) || [];
+    const clones = anchors.map((a) => {
+      const c = a.cloneNode(true);
+      c.classList.add("is-visible"); // THIS is required for your CSS to show it
+      return c;
     });
+    linkContainer.replaceChildren(...clones);
   }
 
   function initTabs() {
     const saved = localStorage.getItem(TAB_KEY);
-    const fallback = TAB_LIST[0] || "1";
-    const active = TAB_LIST.includes(saved) ? saved : fallback;
-    activateTab(active);
-    document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        activateTab(btn.getAttribute("data-tab-btn"));
-      });
+    const fallback = BOOKMARK_CONFIG.length
+      ? String(BOOKMARK_CONFIG[0].tab)
+      : "1";
+    const initial = BOOKMARK_CONFIG.find((t) => String(t.tab) === saved)
+      ? saved
+      : fallback;
+    activeTabId = String(initial);
+    renderTabs();
+    activateTab(activeTabId);
+    // arrow navigation
+    tabContainer.addEventListener("keydown", (e) => {
+      const buttons = Array.from(
+        tabContainer.querySelectorAll("[data-tab-btn]"),
+      );
+      if (!buttons.length) return;
+      let idx = buttons.findIndex(
+        (b) => b.getAttribute("data-tab-btn") === activeTabId,
+      );
+      if (idx === -1) idx = 0;
+      if (e.key === "ArrowRight") {
+        idx = (idx + 1) % buttons.length;
+        activateTab(buttons[idx].getAttribute("data-tab-btn"));
+        buttons[idx].focus();
+        e.preventDefault();
+      } else if (e.key === "ArrowLeft") {
+        idx = (idx - 1 + buttons.length) % buttons.length;
+        activateTab(buttons[idx].getAttribute("data-tab-btn"));
+        buttons[idx].focus();
+        e.preventDefault();
+      }
     });
   }
 
@@ -301,9 +373,17 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const data = JSON.parse(bookmarkData.textContent);
+    try {
+      BOOKMARK_CONFIG = JSON.parse(bookmarkData.textContent);
+    } catch (e) {
+      console.error("failed to parse bookmark-data", e);
+      BOOKMARK_CONFIG = [];
+    }
+    if (!Array.isArray(BOOKMARK_CONFIG)) BOOKMARK_CONFIG = [];
+
+    prepareBookmarkTemplate(BOOKMARK_CONFIG);
     initTheme();
-    renderBookmarks(data);
+    renderTabs();
     initTabs();
     startClocks();
     updateTime(); // initialize immediately

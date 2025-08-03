@@ -69,7 +69,6 @@ select {
 }
 
 .links {
-  column-count: 4;
   padding: 0.5rem;
   padding-left: 0.6rem;
   border-radius: 0 0 0.4rem 0.4rem;
@@ -79,7 +78,7 @@ select {
 
 .links a {
   display: none;
-  margin: 0.25rem 0;
+  /* margin: 0.25rem 0; */
   text-decoration: none;
   color: var(--fg);
 }
@@ -305,4 +304,27 @@ select:focus {
 
 select:hover {
   background-color: color-mix(in srgb, var(--bg) 92%, var(--fg) 8%);
+}
+
+.layout-column {
+  column-count: var(--col-count, 4);
+  column-gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+.layout-column a {
+  display: block; /* base display; visibility still gated by .is-visible */
+  padding: 0.25rem 0;
+  break-inside: avoid;
+  text-decoration: none;
+  color: inherit;
+}
+
+.layout-row {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+.layout-row a {
+  display: block;
+  margin: 0;
 }
