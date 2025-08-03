@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"); */
 
-@import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&display=swap");
 
 :root {
@@ -106,8 +105,9 @@ select {
   text-decoration: none;
   color: var(--fg);
   padding: 0.2rem;
-  margin-bottom: 0.2rem;
-  font-size: 1.05rem;
+  margin-bottom: 0.1rem;
+  font-size: 1.12rem;
+  opacity: 80%;
 }
 
 .links a[data-tab] {
@@ -273,7 +273,6 @@ html[data-active-tab] .links a[data-tab].is-visible {
   background: transparent;
   border: none;
   outline: none;
-  color: inherit;
   font: inherit;
   width: 100%;
   font-size: 1.2rem;
@@ -281,9 +280,10 @@ html[data-active-tab] .links a[data-tab].is-visible {
   font-family: "Livvic";
   font-weight: 400;
   padding: var(--search-pad);
-  caret-color: var(--p4);
+  caret-color: var(--p2);
+  color: var(--p2);
   padding: var(--search-pad);
-  opacity: 90%;
+  opacity: 95%;
 }
 
 .prompt-input::placeholder {
