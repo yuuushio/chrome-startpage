@@ -322,9 +322,13 @@ select:hover {
 .layout-row {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-content: flex-start;
+  grid-template-columns: repeat(var(--col-count, 3), minmax(140px, 1fr));
 }
 .layout-row a {
   display: block;
   margin: 0;
+
+  box-sizing: border-box;
+  text-decoration: none;
 }
