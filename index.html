@@ -26,12 +26,17 @@
           <img id="theme-image" alt="aesthetic" />
         </div>
         <div class="sidebar-bottom">
-          <select id="theme-selector">
-            <option value="default">Default</option>
-            <option value="solarized-dark">Solarized Dark</option>
-            <option value="gruvbox">Gruvbox</option>
-            <option value="nord-dark">Nord</option>
-          </select>
+          <div class="dropdown" id="theme-dropdown">
+            <div
+              class="trigger"
+              tabindex="0"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <div class="label">Theme</div>
+            </div>
+            <div class="menu" role="listbox" aria-label="Theme options"></div>
+          </div>
         </div>
       </aside>
 

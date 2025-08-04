@@ -44,20 +44,21 @@ select {
   padding: 0.6rem 1.1rem;
   font: inherit;
 
-  font-family: "Livvic";
-
   font-family: "Ysabeau Office";
-  font-size: 1.3rem;
-  font-weight: 500;
+
+  font-family: "Livvic";
+  font-size: 1.24rem;
+  font-weight: 400;
   cursor: pointer;
   /* border-radius: 0.4rem 0.4rem 0 0; */
   outline: none;
   position: relative;
   /* margin: 0.0rem; */
   border-radius: 0;
-  border: 2px solid var(--dark6);
+  border: 2px solid var(--dark2);
   background-color: var(--fg);
   background-clip: padding-box;
+  color: var(--dark1);
 }
 
 .tabs button:focus-visible {
@@ -66,9 +67,9 @@ select {
 
 .tabs button.is-active {
   opacity: 100%;
+  color: inheir;
   /* background: var(--base01); */
-  color: var(--bg);
-  border: 2px solid var(--dark6);
+  border: 2px solid var(--dark2);
   /* border-bottom: 1px solid color-mix(in srgb, var(--p6) 90%, var(--bg) 85%); */
   background: var(--bm-active);
 
@@ -77,10 +78,10 @@ select {
 
 .bookmarks {
   position: relative;
-  font-family: "Livvic";
   /* font-family: "Overlock"; */
   font-family: "Ysabeau Office";
 
+  font-family: "Livvic";
   font-weight: 400;
   margin-left: 1rem;
   margin-top: 2.2rem;
@@ -106,8 +107,8 @@ select {
   color: var(--fg);
   padding: 0.2rem;
   margin-bottom: 0.1rem;
-  font-size: 1.12rem;
-  opacity: 80%;
+  font-size: 1.1rem;
+  opacity: 85%;
 }
 
 .links a[data-tab] {
@@ -275,14 +276,17 @@ html[data-active-tab] .links a[data-tab].is-visible {
   outline: none;
   font: inherit;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 
   font-family: "Livvic";
+
+  font-family: "Ysabeau Office";
   font-weight: 400;
   padding: var(--search-pad);
   caret-color: var(--p2);
   color: var(--p2);
-  padding: var(--search-pad);
+  padding: 0.2rem;
+  padding-left: 1rem;
   opacity: 95%;
 }
 
@@ -381,4 +385,82 @@ select:hover {
 
   box-sizing: border-box;
   text-decoration: none;
+}
+
+/******************/
+/* Theme Dropdown */
+/******************/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  font-size: 14px;
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  min-width: 48px;
+  max-width: 220px;
+  height: 42px;
+  padding-inline: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px soldid rgba(255, 255, 255, 0.01);
+  opacity: 40%;
+  border-radius: 8px;
+  cursor: pointer;
+  gap: 6px;
+  transition: all 0.3s;
+}
+.trigger .label {
+  flex: 1;
+}
+
+.trigger:hover {
+  opacity: 70%;
+  border: 1px soldid rgba(255, 255, 255, 0.04);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 6px;
+  width: 200px;
+  padding: 0.4rem;
+  display: none;
+  gap: 0.4rem;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.4s;
+}
+.open .menu {
+  display: block;
+}
+
+.menu-item {
+  padding: 8px 16px;
+  white-space: nowrap;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  margin-bottom: 0.4rem;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-item:hover,
+.menu-item[aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--p6);
+}
+.menu-item.active {
+  background: var(--p6);
+  color: var(--bg);
 }

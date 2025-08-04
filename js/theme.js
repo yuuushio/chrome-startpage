@@ -2,10 +2,12 @@
   "use strict";
 
   const root = document.documentElement;
-  const themeSelector = document.getElementById("theme-selector");
   const tabContainer = document.getElementById("tab-buttons");
   const linkContainer = document.getElementById("tab-links");
   const bookmarkData = document.getElementById("bookmark-data");
+  const dropdown = document.getElementById("theme-dropdown");
+  const trigger = dropdown?.querySelector(".trigger");
+  const menu = dropdown?.querySelector(".menu");
 
   // must match the html selector *values*
   const THEMES = ["default", "solarized-dark", "gruvbox", "nord-dark"];
@@ -98,20 +100,76 @@
       imageEl.style.height = height;
     }
     localStorage.setItem(THEME_KEY, theme);
+    updateDropdownSelection(theme);
+  }
+
+  function openDropdown() {
+    if (!dropdown) return;
+    dropdown.classList.add("open");
+    trigger?.setAttribute("aria-expanded", "true");
+    document.addEventListener("click", outsideClick);
+  }
+  function closeDropdown() {
+    if (!dropdown) return;
+    dropdown.classList.remove("open");
+    trigger?.setAttribute("aria-expanded", "false");
+    document.removeEventListener("click", outsideClick);
+  }
+  function toggleDropdown() {
+    dropdown?.classList.contains("open") ? closeDropdown() : openDropdown();
+  }
+  function outsideClick(e) {
+    if (!dropdown) return;
+    if (!dropdown.contains(e.target)) closeDropdown();
+  }
+
+  function updateDropdownSelection(theme) {
+    if (!trigger || !menu) return;
+    const labelEl = trigger.querySelector(".label");
+    if (labelEl) labelEl.textContent = theme;
+    menu.querySelectorAll(".menu-item").forEach((btn) => {
+      const is = btn.dataset.value === theme;
+      btn.classList.toggle("active", is);
+      btn.setAttribute("aria-selected", is ? "true" : "false");
+    });
+  }
+
+  function buildThemeDropdown() {
+    if (!menu) return;
+    // derive options from imageConfig but constrain to known THEMES
+    const themeKeys = Object.keys(imageConfig).filter((k) =>
+      THEMES.includes(k),
+    );
+    menu.textContent = "";
+    themeKeys.forEach((key) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "menu-item";
+      btn.textContent = key;
+      btn.dataset.value = key;
+      btn.setAttribute("role", "option");
+      btn.setAttribute("aria-selected", "false");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        setTheme(key);
+        updateDropdownSelection(key);
+        closeDropdown();
+      });
+      menu.appendChild(btn);
+    });
   }
 
   function initTheme() {
     const saved = localStorage.getItem(THEME_KEY) || THEMES[0];
-    const selector = document.getElementById("theme-selector");
-    selector.value = saved;
-    // loadThemeSheet(saved);
+    buildThemeDropdown(); // must come before updating label
     setTheme(saved);
-    // if (themeSelector) themeSelector.value = saved;
-    selector.addEventListener("change", (e) => {
-      const theme = e.target.value;
-      loadThemeSheet(theme);
-      setTheme(theme);
-    });
+    // wire dropdown toggle
+    if (trigger) {
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleDropdown();
+      });
+    }
   }
 
   function prepareBookmarkTemplate(config) {
