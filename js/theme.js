@@ -16,11 +16,20 @@
   const SEARCH_STORAGE_KEY = "preferredSearchEngine";
   const SEARCH_DEFAULT = "google";
 
-  const SEARCH_ENGINES = {
-    google: "https://www.google.com/search?q=",
-    yandex: "https://yandex.com/search/?text=",
-    "google-fonts": "https://fonts.google.com/?query=",
-  };
+  let SEARCH_ENGINES;
+  try {
+    SEARCH_ENGINES = JSON.parse(
+      document.getElementById("search-engines-config").textContent,
+    );
+  } catch (err) {
+    console.error("Invalid search-engines-config JSON", err);
+
+    SEARCH_ENGINES = {
+      google: "https://www.google.com/search?q=",
+      yandex: "https://yandex.com/search/?text=",
+    };
+  }
+
   let currentSearchEngine = null;
 
   // must match the html selector *values*
@@ -39,6 +48,12 @@
   let activeTabId = null; // string like "1", "2", etc.
   const tabLinkElements = new Map(); // tabId -> array of <a> elements (template)
 
+  document.querySelectorAll("input").forEach((el) => {
+    el.setAttribute("autocomplete", "off");
+    el.setAttribute("spellcheck", "false");
+    el.setAttribute("autocorrect", "off");
+    el.setAttribute("autocapitalize", "off");
+  });
   const scale = (hex, k) => {
     // 3 mults, 3 clamps, branchless
     const n = parseInt(hex.slice(1), 16);
