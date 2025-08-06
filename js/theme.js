@@ -9,6 +9,20 @@
   const trigger = dropdown?.querySelector(".trigger");
   const menu = dropdown?.querySelector(".menu");
 
+  const searchDropdown = document.getElementById("search-prompt-dropdown");
+  const searchTrigger = document.getElementById("search-prompt-trigger");
+  const searchMenu = document.getElementById("search-prompt-menu");
+  const searchInput = document.getElementById("search-prompt-input");
+  const SEARCH_STORAGE_KEY = "preferredSearchEngine";
+  const SEARCH_DEFAULT = "google";
+
+  const SEARCH_ENGINES = {
+    google: "https://www.google.com/search?q=",
+    yandex: "https://yandex.com/search/?text=",
+    "google-fonts": "https://fonts.google.com/?query=",
+  };
+  let currentSearchEngine = null;
+
   // must match the html selector *values*
   const THEMES = ["default", "solarized-dark", "gruvbox", "nord-dark"];
   const THEME_KEY = "theme";
@@ -40,6 +54,81 @@
     shadowDark: scale(b, 0.67),
     shadowLite: scale(b, 1.33),
   });
+
+  function buildSearchMenu() {
+    if (!searchMenu) return;
+    searchMenu.innerHTML = "";
+    Object.keys(SEARCH_ENGINES).forEach((key) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "search-engine-item";
+      btn.textContent = key
+        .split("-")
+        .map((w) => w[0].toUpperCase() + w.slice(1))
+        .join(" ");
+      btn.dataset.value = key;
+      btn.addEventListener("click", () => selectSearchEngine(key));
+      searchMenu.appendChild(btn);
+    });
+  }
+
+  function loadSearchEngine() {
+    const saved = localStorage.getItem(SEARCH_STORAGE_KEY);
+    currentSearchEngine =
+      saved && SEARCH_ENGINES[saved] ? saved : SEARCH_DEFAULT;
+    updateSearchTrigger();
+  }
+
+  function updateSearchTrigger() {
+    if (!searchTrigger) return;
+    searchTrigger.textContent = currentSearchEngine
+      .split("-")
+      .map((w) => w[0].toUpperCase() + w.slice(1))
+      .join(" ");
+    Array.from(searchMenu.children).forEach((btn) =>
+      btn.classList.toggle("active", btn.dataset.value === currentSearchEngine),
+    );
+  }
+
+  function selectSearchEngine(key) {
+    currentSearchEngine = key;
+    localStorage.setItem(SEARCH_STORAGE_KEY, key);
+    updateSearchTrigger();
+    searchDropdown.classList.remove("open");
+    searchInput.focus();
+  }
+
+  function handleSearchInput(e) {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    const q = searchInput.value.trim();
+    if (!q) {
+      searchInput.focus();
+      return;
+    }
+    window.open(
+      SEARCH_ENGINES[currentSearchEngine] + encodeURIComponent(q),
+      "_blank",
+    );
+    searchInput.value = "";
+  }
+
+  function initSearchPrompt() {
+    buildSearchMenu();
+    loadSearchEngine();
+    if (searchTrigger) {
+      searchTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        searchDropdown.classList.toggle("open");
+      });
+    }
+    document.addEventListener("click", () =>
+      searchDropdown.classList.remove("open"),
+    );
+    if (searchInput) {
+      searchInput.addEventListener("keydown", handleSearchInput);
+    }
+  }
 
   function applyNeumorph() {
     // Matches neumorphism.io defaults
@@ -508,6 +597,7 @@
 
     prepareBookmarkTemplate(BOOKMARK_CONFIG);
     initTheme();
+    initSearchPrompt();
     renderTabs();
     // stabilizeBookmarksHeight();
     initTabs();

@@ -304,6 +304,47 @@ html[data-active-tab] .links a[data-tab].is-visible {
   font-style: italic;
 }
 
+/***************
+* SEARCH MENU *
+****************/
+
+.search-engine-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transform-origin: top;
+  transform: scaleY(0);
+  opacity: 0;
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.3s ease-out;
+}
+.prompt-prefix-container.open .search-engine-menu {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.search-engine-item {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.search-engine-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.search-engine-item.active {
+  background: rgba(0, 123, 255, 0.1);
+}
+
 .clock-container {
   display: flex;
   flex-wrap: wrap;
