@@ -41,22 +41,23 @@
       </aside>
 
       <main class="main">
-        <!-- <div class="search-bar"> -->
-        <!--   <input id="search-input" type="text" placeholder="Search..." /> -->
-        <!-- </div> -->
         <div class="search-prompt">
-          <span class="prompt-prefix-container">
-            <span id="search-text" class="search-prompt-element">search</span>
-          </span>
+          <div class="prompt-prefix-container" id="search-prompt-dropdown">
+            <button
+              type="button"
+              class="search-prompt-element"
+              id="search-prompt-trigger"
+            >
+              Google
+            </button>
+            <div class="search-engine-menu" id="search-prompt-menu"></div>
+          </div>
           <input
-            id="search-bar"
-            type="text"
-            spellcheck="false"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
+            id="search-prompt-input"
             class="prompt-input"
-            placeholder="search..."
+            type="text"
+            placeholder="Search..."
+            autocomplete="off"
           />
         </div>
         <div class="bookmarks">

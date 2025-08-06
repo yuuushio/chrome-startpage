@@ -242,7 +242,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   margin-bottom: 1rem;
   padding: var(--search-pad);
   padding-left: 0;
-  font-family: monospace;
+  font-family: "Terminess Nerd Font";
   font-size: 1rem;
   color: var(--p4);
   height: 1rem;
@@ -254,20 +254,28 @@ html[data-active-tab] .links a[data-tab].is-visible {
 }
 
 .prompt-prefix-container {
+  position: relative;
+  display: flex;
   white-space: nowrap;
   /* margin-right: 0.5rem; */
-  padding: var(--search-pad);
-  user-select: none;
-  color: var(--bg);
-  border-radius: 0.1rem;
-  opacity: 80%;
-  background-color: var(--p2);
-  border: 0.1rem solid var(--bg);
+  /* border: 0.1rem solid var(--bg); */
   /* border-right: 0.1rem solid var(--bg); */
+  border: none;
+  outline: none;
 }
 
 .search-prompt-element {
   margin-left: 0;
+}
+.search-prompt-element {
+  padding: var(--search-pad);
+  /* background: transparent; */
+
+  background-color: var(--p2);
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 .prompt-input {
@@ -276,11 +284,11 @@ html[data-active-tab] .links a[data-tab].is-visible {
   outline: none;
   font: inherit;
   width: 100%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 
-  font-family: "Livvic";
-
-  font-family: "Ysabeau Office";
+  /* font-family: "Livvic"; */
+  /**/
+  /* font-family: "Ysabeau Office"; */
   font-weight: 400;
   padding: var(--search-pad);
   caret-color: var(--p2);
