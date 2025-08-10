@@ -500,12 +500,13 @@
     // Clock face
     ctx.beginPath();
     ctx.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
-    ctx.fillStyle = styles.getPropertyValue("--dark2").trim() || "#f9f9f9";
+    ctx.fillStyle = styles.getPropertyValue("--bg-500").trim() || "#f9f9f9";
     ctx.fill();
-    const timeTicksColor = styles.getPropertyValue("--base03").trim() || "#000";
-    const handColor = styles.getPropertyValue("--base04").trim() || "#000";
+    const timeTicksColor =
+      styles.getPropertyValue("--xgray-2").trim() || "#000";
+    const handColor = styles.getPropertyValue("--xlg-1").trim() || "#000";
 
-    const secStrokeColor = styles.getPropertyValue("--p1").trim() || "#000";
+    const secStrokeColor = styles.getPropertyValue("--br").trim() || "#000";
     ctx.strokeStyle = timeTicksColor;
     ctx.lineWidth = 2;
     ctx.stroke();

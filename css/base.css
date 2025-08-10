@@ -55,10 +55,10 @@ select {
   position: relative;
   /* margin: 0.0rem; */
   border-radius: 0;
-  border: 2px solid var(--dark2);
+  border: 2px solid var(--bg-600);
   background-color: var(--fg);
   background-clip: padding-box;
-  color: var(--dark1);
+  color: var(--bg-500);
 }
 
 .tabs button:focus-visible {
@@ -69,8 +69,8 @@ select {
   opacity: 100%;
   color: inheir;
   /* background: var(--base01); */
-  border: 2px solid var(--dark2);
-  /* border-bottom: 1px solid color-mix(in srgb, var(--p6) 90%, var(--bg) 85%); */
+  border: 2px solid var(--bg-600);
+  /* border-bottom: 1px solid color-mix(in srgb, var(--nc) 90%, var(--bg) 85%); */
   background: var(--bm-active);
 
   background-clip: padding-box;
@@ -89,7 +89,7 @@ select {
   padding: 1rem;
   padding-top: 2.5rem;
   border-radius: 0.05rem;
-  background-color: var(--dark1);
+  background-color: var(--bg-500);
 }
 
 .links {
@@ -174,7 +174,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   height: 2rem;
   padding: 0.2rem;
   margin-bottom: 0.5rem;
-  color: var(--p8);
+  color: var(--bd);
 
   margin-bottom: 1.5rem;
   border-radius: 0.4rem;
@@ -210,7 +210,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 .sidebar-top-date {
   font-size: 0.8rem;
   opacity: 0.7;
-  color: var(--p8);
+  color: var(--bd);
   display: flex;
   text-align: center;
   justify-content: center;
@@ -244,11 +244,11 @@ html[data-active-tab] .links a[data-tab].is-visible {
   padding-left: 0;
   font-family: "Terminess Nerd Font";
   font-size: 1rem;
-  color: var(--p4);
+  color: var(--nb);
   height: 1rem;
-  border: 0.1rem solid var(--dark2);
+  border: 0.1rem solid var(--bg-600);
   border-radius: 0.1rem;
-  background-color: var(--dark1);
+  background-color: var(--bg-500);
   /* max-width: 20rem; */
   /* width: 100%; */
 }
@@ -271,7 +271,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   padding: var(--search-pad);
   /* background: transparent; */
 
-  background-color: var(--p2);
+  background-color: var(--ngr);
   border: none;
   outline: none;
   font: inherit;
@@ -291,8 +291,8 @@ html[data-active-tab] .links a[data-tab].is-visible {
   /* font-family: "Ysabeau Office"; */
   font-weight: 400;
   padding: var(--search-pad);
-  caret-color: var(--p2);
-  color: var(--p2);
+  caret-color: var(--ngr);
+  color: var(--ngr);
   padding: 0.2rem;
   padding-left: 1rem;
   opacity: 95%;
@@ -313,7 +313,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
   top: calc(100% + 4px);
   left: 0;
   background: var(--bg);
-  border: 1px solid var(--p8);
+  border: 1px solid var(--bd);
   border-radius: 0.1rem;
   box-shadow: 3px 3px 6px 4px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -346,10 +346,10 @@ html[data-active-tab] .links a[data-tab].is-visible {
 }
 .search-engine-item:hover {
   background: rgba(255, 255, 255, 0.04);
-  color: var(--p4);
+  color: var(--nb);
 }
 .search-engine-item.active {
-  background: var(--p12);
+  background: var(--bb);
   color: var(--bg);
 }
 
@@ -385,7 +385,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 select {
   appearance: none;
   background-color: var(--bg);
-  color: var(--p8);
+  color: var(--bd);
   border: 1px solid color-mix(in srgb, var(--fg) 5%, var(--bg) 95%);
   padding: 0.4rem 2.2rem 0.4rem 0.6rem;
   font-size: 0.95rem;
@@ -462,19 +462,20 @@ select:hover {
   height: 42px;
   padding-inline: 24px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px soldid rgba(255, 255, 255, 0.01);
-  opacity: 40%;
+  border: 1px solid rgba(255, 255, 255, 0.01);
+  opacity: 20%;
   border-radius: 8px;
   cursor: pointer;
   gap: 6px;
-  transition: all 0.3s;
+  transition: all 0.2s;
+  outline: none;
 }
 .trigger .label {
   flex: 1;
 }
 
 .trigger:hover {
-  opacity: 70%;
+  opacity: 50%;
   border: 1px soldid rgba(255, 255, 255, 0.04);
 }
 
@@ -485,7 +486,7 @@ select:hover {
   background: var(--bg);
   color: var(--fg);
   border-radius: 6px;
-  width: 200px;
+  width: 160px;
   padding: 0.4rem;
   display: none;
   gap: 0.4rem;
@@ -515,9 +516,15 @@ select:hover {
 .menu-item:hover,
 .menu-item[aria-selected="true"] {
   background: rgba(255, 255, 255, 0.04);
-  color: var(--p6);
+  color: var(--nc);
 }
 .menu-item.active {
-  background: var(--p6);
+  background: var(--nc);
   color: var(--bg);
+}
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  box-shadow: none !important; /* catch custom rings */
 }
