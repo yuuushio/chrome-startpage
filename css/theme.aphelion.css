@@ -26,10 +26,10 @@ html.theme-aphelion {
   --xgray-2: #353a47;
   --xgray-3: #3e4451;
   --xlg-1: #acb4bd;
-  --xlg-2: #8a92b3;
-  --xlg-3: #717894;
+  --xlg-2: #7e87a3;
+  --xlg-3: #676f88;
   --xnordblue-1: #85bde8;
-  --xnordblue-2: #b7bee7;
+  --xnordblue-2: #a6afd1;
   --bg-100: #3a414d;
   --bg-200: #2f3540;
   --bg-300: #20252e;
@@ -39,7 +39,7 @@ html.theme-aphelion {
 
   --bm-active: var(--nb);
   --bm-border: var(--nb);
-
+  /* --bg: var(--nd); */
   --sec-pm: var(--nr);
   --sec-am: var(--nb);
 }
