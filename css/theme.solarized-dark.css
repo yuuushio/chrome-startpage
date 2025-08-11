@@ -35,4 +35,7 @@ html.theme-solarized-dark {
   --bg-700: #00161d;
   --bm-active: var(--nb);
   --bm-border: var(--nb);
+
+  --sec-pm: var(--nr);
+  --sec-am: var(--nb);
 }

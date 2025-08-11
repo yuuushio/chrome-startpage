@@ -35,4 +35,7 @@ html.theme-gruvbox {
   --bg-700: #1e1e1e;
   --bm-active: var(--nb);
   --bm-border: var(--nb);
+
+  --sec-pm: var(--nr);
+  --sec-am: var(--nb);
 }

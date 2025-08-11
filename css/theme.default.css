@@ -36,4 +36,7 @@ html.theme-default {
 
   --bm-active: var(--nb);
   --bm-border: var(--nb);
+
+  --sec-pm: var(--nr);
+  --sec-am: var(--nb);
 }

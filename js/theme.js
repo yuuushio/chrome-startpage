@@ -490,7 +490,9 @@
     const now = new Date(Date.now() + tzOffsetMinutes * 60 * 60 * 1000);
     const sec = now.getUTCSeconds();
     const min = now.getUTCMinutes();
-    const hr = now.getUTCHours() % 12;
+    const hr = now.getUTCHours();
+    const hr12 = hr % 12;
+    const isPM = hr >= 12;
 
     const size = ctx.canvas.width;
 
@@ -506,7 +508,13 @@
       styles.getPropertyValue("--xgray-2").trim() || "#000";
     const handColor = styles.getPropertyValue("--xlg-1").trim() || "#000";
 
-    const secStrokeColor = styles.getPropertyValue("--br").trim() || "#000";
+    const secStrokeColor = (
+      (isPM
+        ? styles.getPropertyValue("--sec-pm") || styles.getPropertyValue("--br") // PM fallback bright red
+        : styles.getPropertyValue("--sec-am") ||
+          styles.getPropertyValue("--nr")) || // AM fallback normal red
+      "#000"
+    ).trim();
     ctx.strokeStyle = timeTicksColor;
     ctx.lineWidth = 2;
     ctx.stroke();

@@ -34,4 +34,6 @@ html.theme-nord-dark {
   --bg-700: #232832;
   --bm-active: var(--nb);
   --bm-border: var(--nb);
+  --sec-pm: var(--nr);
+  --sec-am: var(--nb);
 }
