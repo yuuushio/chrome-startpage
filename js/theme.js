@@ -182,20 +182,19 @@
     });
   }
 
+  const THEME_PREFIX = "theme-";
   function setTheme(theme) {
     if (!THEMES.includes(theme) || theme === currentTheme) return;
-
     currentTheme = theme;
 
-    THEMES.forEach((t) => root.classList.remove(`theme-${t}`));
-    root.className = `theme-${theme}`;
-    // root.classList.add(`theme-${theme}`);
+    const kept = root.className
+      .split(/\s+/)
+      .filter((c) => c && !c.startsWith(THEME_PREFIX));
+    kept.push(`${THEME_PREFIX}${theme}`);
+    root.className = kept.join(" ");
 
-    // applyNeumorphColours();
-    // loadThemeCSS(theme).then(applyNeumorphColours);
     loadThemeSheet(theme).then(() => {
-      //  order enforced here
-      if (theme === currentTheme) applyNeumorph(); //  ignore stale loads
+      if (theme === currentTheme) applyNeumorph();
     });
 
     if (imageEl && imageConfig[theme]) {
