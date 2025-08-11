@@ -465,6 +465,27 @@
     }
   }
 
+  function makeZonedHMSGetter(tz) {
+    const fmt = new Intl.DateTimeFormat("en-GB", {
+      timeZone: tz,
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    return () => {
+      let h = 0,
+        m = 0,
+        s = 0;
+      for (const p of fmt.formatToParts(new Date())) {
+        if (p.type === "hour") h = p.value | 0;
+        if (p.type === "minute") m = p.value | 0;
+        if (p.type === "second") s = p.value | 0;
+      }
+      return { h, m, s, isPM: h >= 12 };
+    };
+  }
+
   function createClockCanvas(id, label) {
     const container = document.createElement("div");
     container.className = "clock-block";
@@ -483,73 +504,54 @@
     return { container, canvas };
   }
 
-  function drawClock(ctx, tzOffsetMinutes) {
+  // replace your drawClock with this parts-based version; no offset math anywhere
+  function drawClockParts(ctx, { h, m, s, isPM }) {
     const styles = getComputedStyle(document.documentElement);
-
-    const now = new Date(Date.now() + tzOffsetMinutes * 60 * 60 * 1000);
-    const sec = now.getUTCSeconds();
-    const min = now.getUTCMinutes();
-    const hr = now.getUTCHours();
-    const hr12 = hr % 12;
-    const isPM = hr >= 12;
-
     const size = ctx.canvas.width;
+    const r = size / 2;
 
-    const radius = size / 2;
     ctx.clearRect(0, 0, size, size);
-
-    // Clock face
+    // face
     ctx.beginPath();
-    ctx.arc(radius, radius, radius - 1, 0, 2 * Math.PI);
+    ctx.arc(r, r, r - 1, 0, Math.PI * 2);
     ctx.fillStyle = styles.getPropertyValue("--bg-500").trim() || "#f9f9f9";
     ctx.fill();
-    const timeTicksColor =
-      styles.getPropertyValue("--xgray-2").trim() || "#000";
-    const handColor = styles.getPropertyValue("--xlg-1").trim() || "#000";
-
-    const secStrokeColor = (
-      (isPM
-        ? styles.getPropertyValue("--sec-pm") || styles.getPropertyValue("--br") // PM fallback bright red
-        : styles.getPropertyValue("--sec-am") ||
-          styles.getPropertyValue("--nr")) || // AM fallback normal red
-      "#000"
-    ).trim();
-    ctx.strokeStyle = timeTicksColor;
+    const tick = styles.getPropertyValue("--xgray-2").trim() || "#000";
+    ctx.strokeStyle = tick;
     ctx.lineWidth = 2;
     ctx.stroke();
-
-    // Tick marks
-    ctx.strokeStyle = timeTicksColor;
     for (let i = 0; i < 12; i++) {
-      const angle = (i * Math.PI) / 6;
-      const x1 = radius + Math.cos(angle) * (radius - 10);
-      const y1 = radius + Math.sin(angle) * (radius - 10);
-      const x2 = radius + Math.cos(angle) * (radius - 4);
-      const y2 = radius + Math.sin(angle) * (radius - 4);
+      const a = (i * Math.PI) / 6;
       ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
+      ctx.moveTo(r + Math.cos(a) * (r - 10), r + Math.sin(a) * (r - 10));
+      ctx.lineTo(r + Math.cos(a) * (r - 4), r + Math.sin(a) * (r - 4));
       ctx.stroke();
     }
 
-    const toAngle = (unit, max) => (Math.PI * 2 * unit) / max - Math.PI / 2;
+    const hand = styles.getPropertyValue("--xlg-1").trim() || "#000";
+    const sec = (
+      (isPM
+        ? styles.getPropertyValue("--sec-pm") || styles.getPropertyValue("--br")
+        : styles.getPropertyValue("--sec-am") ||
+          styles.getPropertyValue("--nr")) || "#000"
+    ).trim();
 
-    const drawHand = (angle, length, width, color) => {
+    const to = (u, max) => (Math.PI * 2 * u) / max - Math.PI / 2;
+    const draw = (ang, len, wid, col) => {
       ctx.beginPath();
-      ctx.lineWidth = width;
       ctx.lineCap = "round";
-      ctx.strokeStyle = color;
-      ctx.moveTo(radius, radius);
-      ctx.lineTo(
-        radius + Math.cos(angle) * length,
-        radius + Math.sin(angle) * length,
-      );
+      ctx.lineWidth = wid;
+      ctx.strokeStyle = col;
+      ctx.moveTo(r, r);
+      ctx.lineTo(r + Math.cos(ang) * len, r + Math.sin(ang) * len);
       ctx.stroke();
     };
 
-    drawHand(toAngle(hr + min / 60, 12), radius * 0.5, 4, handColor);
-    drawHand(toAngle(min + sec / 60, 60), radius * 0.7, 3, handColor);
-    drawHand(toAngle(sec, 60), radius * 0.8, 1, secStrokeColor);
+    const mm = m + s / 60;
+    const hh = (h % 12) + mm / 60;
+    draw(to(hh, 12), r * 0.5, 4, hand);
+    draw(to(mm, 60), r * 0.7, 3, hand);
+    draw(to(s, 60), r * 0.8, 1, sec);
   }
 
   function startClocks() {
@@ -560,19 +562,22 @@
     if (!sidebar) return;
 
     const clocks = [];
-    Object.entries(getTimezonesConfig()).forEach(([key, enabled]) => {
-      if (!enabled || !tzMap[key]) return;
-      const { container, canvas } = createClockCanvas(key, tzMap[key].label);
+    for (const [key, info] of Object.entries(tzMap)) {
+      if (!info?.tz) continue;
+      const { container, canvas } = createClockCanvas(key, info.label);
       sidebar.appendChild(container);
       const ctx = canvas.getContext("2d");
-      clocks.push({ ctx, offset: tzMap[key].offset });
-    });
-
-    function renderAll() {
-      for (const c of clocks) drawClock(c.ctx, c.offset);
+      clocks.push({ ctx, get: makeZonedHMSGetter(info.tz) });
     }
 
-    const MAX_FRAMES = 10; // ~160ms at 60Hz; bump if your theme CSS is slower cold
+    function renderAll() {
+      for (const c of clocks) {
+        const t = c.get();
+        drawClockParts(c.ctx, t);
+      }
+    }
+
+    const MAX_FRAMES = 10;
     const MAX_MS = 450;
     let frames = 0;
     const t0 = performance.now();
