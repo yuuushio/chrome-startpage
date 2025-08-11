@@ -556,15 +556,11 @@
     const tzMap = JSON.parse(
       document.getElementById("timezone-config").textContent,
     );
-
-    const config = getTimezonesConfig();
-    // const sidebar = document.querySelector('.sidebar-top');
     const sidebar = document.querySelector(".clock-container");
     if (!sidebar) return;
 
     const clocks = [];
-
-    Object.entries(config).forEach(([key, enabled]) => {
+    Object.entries(getTimezonesConfig()).forEach(([key, enabled]) => {
       if (!enabled || !tzMap[key]) return;
       const { container, canvas } = createClockCanvas(key, tzMap[key].label);
       sidebar.appendChild(container);
@@ -572,13 +568,37 @@
       clocks.push({ ctx, offset: tzMap[key].offset });
     });
 
-    function tick() {
-      clocks.forEach((c) => drawClock(c.ctx, c.offset));
-      requestAnimationFrame(tick);
+    function renderAll() {
+      for (const c of clocks) drawClock(c.ctx, c.offset);
     }
 
-    tick();
+    const MAX_FRAMES = 10; // ~160ms at 60Hz; bump if your theme CSS is slower cold
+    const MAX_MS = 450;
+    let frames = 0;
+    const t0 = performance.now();
+
+    function prime() {
+      renderAll();
+      frames++;
+      if (frames < MAX_FRAMES && performance.now() - t0 < MAX_MS) {
+        requestAnimationFrame(prime);
+      } else {
+        steady();
+      }
+    }
+
+    function steady() {
+      function tick() {
+        renderAll();
+        const now = Date.now();
+        setTimeout(tick, 1000 - (now % 1000)); // align to the next second
+      }
+      tick();
+    }
+
+    requestAnimationFrame(prime);
   }
+
   function updateTime() {
     const now = new Date();
     const timeEl = document.getElementById("time");
