@@ -92,9 +92,14 @@ select {
   padding-top: 2.5rem;
   border-radius: 0.05rem;
   background-color: var(--bg-500);
+  width: 100%;
 }
 
 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+  align-items: flex-start;
   padding: 0.6rem;
   padding-left: 0.6rem;
   border-radius: 0 0 0.4rem 0.4rem;
@@ -102,47 +107,43 @@ select {
   transition: background 0.2s ease;
 }
 
+/* .links a[data-tab] { */
+/*   display: none; */
+/* } */
+/**/
+/* html[data-active-tab] .links a[data-tab] { */
+/*   display: none; */
+/* } */
+/**/
+/* html[data-active-tab] .links a[data-tab].is-visible { */
+/*   display: inline-block;  */
+/*   width: auto;  */
+/*   max-width: max-content;  */
+/* } */
+
 .links a {
   display: none;
-  /* margin: 0.25rem 0; */
   text-decoration: none;
   color: var(--fg);
-  padding: 0.2rem;
-  margin-bottom: 0.1rem;
   font-size: 1.1rem;
   opacity: 85%;
-}
-
-.links a[data-tab] {
-  display: none;
-}
-
-html[data-active-tab] .links a[data-tab] {
-  display: none;
-}
-
-html[data-active-tab] .links a[data-tab].is-visible {
-  display: inline-block; /* not block */
-  width: auto; /* shrink-wrap */
-  max-width: max-content; /* be explicit */
-}
-
-.layout-row a,
-.layout-column a {
-  display: inline-block;
 }
 
 /* Give the "box" around the text */
 .links a {
   position: relative; /* anchor the overlay */
   z-index: 0;
-  display: inline-block;
   padding: 0.2rem 0.5rem;
   border-radius: 0.1rem;
   text-decoration: none;
   color: var(--fg);
   /* define once, cheap to compute */
   transition: color 90ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.links a.is-visible {
+  display: inline-flex;
+  flex: 0 0 auto;
 }
 
 .links a::before {
@@ -187,7 +188,7 @@ html[data-active-tab] .links a[data-tab].is-visible {
 
 .container {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -290,6 +291,9 @@ html[data-active-tab] .links a[data-tab].is-visible {
   flex-direction: column;
   margin-top: 1.65rem;
   gap: 1rem;
+  max-width: 800px;
+  width: 100%;
+  justify-self: start;
 }
 
 .search-prompt {
@@ -473,33 +477,6 @@ select:focus {
 
 select:hover {
   background-color: color-mix(in srgb, var(--bg) 92%, var(--fg) 8%);
-}
-
-.layout-column {
-  column-count: var(--col-count, 4);
-  column-gap: 0.75rem;
-  padding-top: 0.25rem;
-}
-.layout-column a {
-  display: block; /* base display; visibility still gated by .is-visible */
-  padding: 0.25rem 0;
-  break-inside: avoid;
-  text-decoration: none;
-  color: inherit;
-}
-
-.layout-row {
-  display: grid;
-  gap: 0.5rem;
-  align-content: flex-start;
-  grid-template-columns: repeat(var(--col-count, 3), minmax(140px, 1fr));
-}
-.layout-row a {
-  display: block;
-  margin: 0;
-
-  box-sizing: border-box;
-  text-decoration: none;
 }
 
 /******************/

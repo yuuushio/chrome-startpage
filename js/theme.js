@@ -387,36 +387,30 @@
   function activateTab(tabId) {
     if (!tabLinkElements.has(String(tabId))) return;
     activeTabId = String(tabId);
-    root.setAttribute("data-active-tab", activeTabId);
+    document.documentElement.setAttribute("data-active-tab", activeTabId);
     localStorage.setItem(TAB_KEY, activeTabId);
 
-    // buttons: toggle is-active
+    // tab button state
     document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
       const is = btn.getAttribute("data-tab-btn") === activeTabId;
       btn.classList.toggle("is-active", is);
       btn.setAttribute("aria-selected", is ? "true" : "false");
     });
 
-    // links: rebuild container according to layout
-    const tabObj = BOOKMARK_CONFIG.find((t) => String(t.tab) === activeTabId);
-    if (!tabObj) return;
-
-    // layout handling (your CSS currently doesn’t define layout-row/column; safe to leave or add later)
+    // ensure flex layout; strip legacy grid classes
+    linkContainer.classList.add("links");
     linkContainer.classList.remove("layout-row", "layout-column");
-    const layout = tabObj.layout === "row" ? "layout-row" : "layout-column";
-    linkContainer.classList.add(layout);
+    linkContainer.style.removeProperty("--col-count");
 
-    const colCount = getEffectiveColumnCount(tabObj);
-    linkContainer.style.setProperty("--col-count", colCount);
-
-    // replace children and mark visible
+    // render only active tab links and mark visible
     const anchors = tabLinkElements.get(activeTabId) || [];
-    const clones = anchors.map((a) => {
+    const frag = document.createDocumentFragment();
+    for (const a of anchors) {
       const c = a.cloneNode(true);
-      c.classList.add("is-visible"); // THIS is required for your CSS to show it
-      return c;
-    });
-    linkContainer.replaceChildren(...clones);
+      c.classList.add("is-visible");
+      frag.appendChild(c);
+    }
+    linkContainer.replaceChildren(frag);
   }
 
   function initTabs() {
