@@ -1,16 +1,26 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"); */
 
 /* @import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap"); */
 
 /* @import url("https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
+
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&display=swap"); */
 
 :root {
   --search-pad: 1rem;
   --bg: #ffffff;
   --fg: #000000;
   --rail-w: 100px;
+  --search-font: "Terminess Nerd Font";
+  --bm-font: "Poppins";
+  --bm-font: "Sometype Mono";
+  --bm-font: "Cutive Mono";
+  --bm-font: "AnonymicePro Nerd Font";
+  /* --bm-font: "Triplicate T4"; */
 }
 
 body {
@@ -40,14 +50,15 @@ select {
 .tabs button {
   background: none;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 0.8rem;
   font: inherit;
 
-  font-family: "Ysabeau Office";
+  /* font-family: "Ysabeau Office"; */
 
-  font-family: "Livvic";
-  font-size: 1.2rem;
-  font-weight: 500;
+  /* font-family: "Livvic"; */
+  font-family: "Triplicate T3", var(--bm-font), monospace;
+  font-size: 1.25rem;
+  font-weight: 400;
   cursor: pointer;
   /* border-radius: 0.4rem 0.4rem 0 0; */
   outline: none;
@@ -56,8 +67,7 @@ select {
   border-radius: 0;
   border: 2px solid var(--bg-600);
   /* border: 2px solid var(--bm-active); */
-  background-color: var(--bg);
-  background-color: var(--fg);
+  background-color: var(--xlg-1);
 
   color: var(--bg);
   background-clip: padding-box;
@@ -81,9 +91,11 @@ select {
 .bookmarks {
   position: relative;
   /* font-family: "Overlock"; */
-  font-family: "Ysabeau Office";
+  /* font-family: "Ysabeau Office"; */
+  /* font-family: "Livvic"; */
 
-  font-family: "Livvic";
+  font-family: var(--bm-font);
+  font-family: var(--search-font);
   font-weight: 400;
   margin-top: 2.2rem;
   border: 0.15rem solid var(--bm-border);
@@ -113,18 +125,15 @@ select {
   display: none;
   text-decoration: none;
   color: var(--fg);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
   opacity: 85%;
-}
 
-/* Give the "box" around the text */
-.links a {
   position: relative; /* anchor the overlay */
   z-index: 0;
   padding: 0.2rem 0.5rem;
   border-radius: 0.1rem;
   text-decoration: none;
-  color: var(--fg);
   /* define once, cheap to compute */
   transition: color 90ms cubic-bezier(0.2, 0, 0, 1);
 }
@@ -277,8 +286,6 @@ select {
   height: 2rem;
   padding: 0.2rem;
   margin-bottom: 0.5rem;
-  color: var(--bd);
-
   margin-bottom: 1.5rem;
   border-radius: 0.4rem;
   background: linear-gradient(
@@ -289,6 +296,11 @@ select {
   box-shadow:
     2px 2px 6px var(--neu-shadow-dark),
     -1px -1px 8px var(--neu-shadow-lite);
+}
+
+#time {
+  color: var(--xnordblue-2);
+  opacity: 0.85;
 }
 
 /* .sidebar-image { */
@@ -367,7 +379,7 @@ select {
   margin-bottom: 1rem;
   padding: var(--search-pad);
   padding-left: 0;
-  font-family: "Terminess Nerd Font";
+  font-family: var(--search-font);
   font-size: 1rem;
   color: var(--nb);
   height: 1rem;

@@ -1,0 +1,45 @@
+html.theme-aphelion {
+  --bg: #101319;
+  --fg: #f4f3ee;
+  --cursor: #f4f3ee;
+  --cursor-text: #171b24;
+  --selection-bg: #f4f3ee;
+  --selection-fg: #3a435a;
+  --nd: #171b24;
+  --nr: #e34f4f;
+  --ngr: #69bfce;
+  --ny: #e37e4f;
+  --nb: #5679e3;
+  --nm: #956dca;
+  --nc: #5599e2;
+  --nw: #f4f3ee;
+  --bd: #3a435a;
+  --br: #de2b2b;
+  --bgr: #56b7c8;
+  --by: #de642b;
+  --bb: #3e66e0;
+  --bm: #885ac4;
+  --bc: #3f8cde;
+  --bw: #dddbcf;
+  --xpink: #f9aba6;
+  --xgray-1: #2c313d;
+  --xgray-2: #353a47;
+  --xgray-3: #3e4451;
+  --xlg-1: #acb4bd;
+  --xlg-2: #8a92b3;
+  --xlg-3: #717894;
+  --xnordblue-1: #85bde8;
+  --xnordblue-2: #b7bee7;
+  --bg-100: #3a414d;
+  --bg-200: #2f3540;
+  --bg-300: #20252e;
+  --bg-500: #0e1117;
+  --bg-600: #0c0f14;
+  --bg-700: #0a0d12;
+
+  --bm-active: var(--nb);
+  --bm-border: var(--nb);
+
+  --sec-pm: var(--nr);
+  --sec-am: var(--nb);
+}

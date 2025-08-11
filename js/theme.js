@@ -33,7 +33,13 @@
   let currentSearchEngine = null;
 
   // must match the html selector *values*
-  const THEMES = ["default", "solarized-dark", "gruvbox", "nord-dark"];
+  const THEMES = [
+    "default",
+    "solarized-dark",
+    "gruvbox",
+    "nord-dark",
+    "aphelion",
+  ];
   const THEME_KEY = "theme";
   const TAB_KEY = "activeTab";
   const themeDir = "css/";
@@ -520,7 +526,7 @@
       ctx.stroke();
     }
 
-    const hand = styles.getPropertyValue("--xlg-1").trim() || "#000";
+    const hand = styles.getPropertyValue("--xnordblue-2").trim() || "#000";
     const sec = (
       (isPM
         ? styles.getPropertyValue("--sec-pm") || styles.getPropertyValue("--br")
