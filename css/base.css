@@ -85,7 +85,6 @@ select {
 
   font-family: "Livvic";
   font-weight: 400;
-  margin-left: 1rem;
   margin-top: 2.2rem;
   border: 0.15rem solid var(--bm-border);
   padding: 1rem;
@@ -93,33 +92,23 @@ select {
   border-radius: 0.05rem;
   background-color: var(--bg-500);
   width: 100%;
+  min-width: 270px;
+  box-sizing: border-box;
 }
 
 .links {
-  display: flex;
-  flex-wrap: wrap;
+  --cell-bin: 14ch;
+  display: grid;
   gap: 0.5rem 0.6rem;
-  align-items: flex-start;
+  grid-template-columns: repeat(auto-fit, minmax(var(--cell-min, 14ch), 1fr));
+  justify-items: start;
+  align-items: center;
   padding: 0.6rem;
   padding-left: 0.6rem;
   border-radius: 0 0 0.4rem 0.4rem;
   /* background: var(--base02); */
   transition: background 0.2s ease;
 }
-
-/* .links a[data-tab] { */
-/*   display: none; */
-/* } */
-/**/
-/* html[data-active-tab] .links a[data-tab] { */
-/*   display: none; */
-/* } */
-/**/
-/* html[data-active-tab] .links a[data-tab].is-visible { */
-/*   display: inline-block;  */
-/*   width: auto;  */
-/*   max-width: max-content;  */
-/* } */
 
 .links a {
   display: none;
@@ -142,8 +131,17 @@ select {
 }
 
 .links a.is-visible {
-  display: inline-flex;
-  flex: 0 0 auto;
+  display: flex;
+  min-width: 0;
+  padding: 0.2rem 0.5rem;
+  text-decoration: none;
+}
+.links a {
+  white-space: nowrap;
+}
+.links a .label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .links a::before {
@@ -189,7 +187,7 @@ select {
 .container {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 2rem;
+  gap: 4rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -291,7 +289,7 @@ select {
   flex-direction: column;
   margin-top: 1.65rem;
   gap: 1rem;
-  max-width: 800px;
+  max-width: 750px;
   width: 100%;
   justify-self: start;
 }
@@ -300,7 +298,6 @@ select {
   display: flex;
   align-items: center;
   background-color: var(--bg);
-  margin-left: 1rem;
   margin-bottom: 1rem;
   padding: var(--search-pad);
   padding-left: 0;
@@ -380,7 +377,6 @@ select {
   box-shadow: 3px 3px 6px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  margin-left: -1px;
   padding: 4px;
   padding-bottom: 0rem;
   z-index: 1000;

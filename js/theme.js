@@ -399,8 +399,6 @@
 
     // ensure flex layout; strip legacy grid classes
     linkContainer.classList.add("links");
-    linkContainer.classList.remove("layout-row", "layout-column");
-    linkContainer.style.removeProperty("--col-count");
 
     // render only active tab links and mark visible
     const anchors = tabLinkElements.get(activeTabId) || [];
