@@ -17,64 +17,75 @@
     <link rel="stylesheet" href="css/base.css" />
     <!-- themes are loaded dynamically -->
   </head>
+
   <body>
-    <div class="container">
-      <aside class="sidebar">
-        <div class="sidebar-top">
-          <div class="sidebar-top-time">
-            <p id="time"></p>
-          </div>
-
-          <div class="sidebar-top-date">
-            <p id="date"></p>
-            <p id="weather"></p>
-          </div>
-        </div>
-        <div class="sidebar-image">
-          <!-- you can use <img> or a div with background-image -->
-          <img id="theme-image" alt="aesthetic" />
-        </div>
-        <div class="sidebar-bottom">
-          <div class="dropdown" id="theme-dropdown">
-            <div
-              class="trigger"
-              tabindex="0"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-            >
-              <div class="label">Theme</div>
-            </div>
-            <div class="menu" role="listbox" aria-label="Theme options"></div>
-          </div>
-        </div>
+    <div class="stage">
+      <aside class="clock-dock">
+        <div class="clock-container" aria-label="World clocks"></div>
       </aside>
+      <div class="container">
+        <div class="main-content-container">
+          <aside class="sidebar">
+            <div class="sidebar-top">
+              <div class="sidebar-top-time">
+                <p id="time"></p>
+              </div>
 
-      <main class="main">
-        <div class="search-prompt">
-          <div class="prompt-prefix-container" id="search-prompt-dropdown">
-            <button
-              type="button"
-              class="search-prompt-element"
-              id="search-prompt-trigger"
-            >
-              Google
-            </button>
-            <div class="search-engine-menu" id="search-prompt-menu"></div>
-          </div>
-          <input
-            id="search-prompt-input"
-            class="prompt-input"
-            type="text"
-            placeholder="Search..."
-            autocomplete="off"
-          />
+              <div class="sidebar-top-date">
+                <p id="date"></p>
+                <p id="weather"></p>
+              </div>
+            </div>
+            <div class="sidebar-image">
+              <!-- you can use <img> or a div with background-image -->
+              <img id="theme-image" alt="aesthetic" />
+            </div>
+            <div class="sidebar-bottom">
+              <div class="dropdown" id="theme-dropdown">
+                <div
+                  class="trigger"
+                  tabindex="0"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                >
+                  <div class="label">Theme</div>
+                </div>
+                <div
+                  class="menu"
+                  role="listbox"
+                  aria-label="Theme options"
+                ></div>
+              </div>
+            </div>
+          </aside>
+
+          <main class="main">
+            <div class="search-prompt">
+              <div class="prompt-prefix-container" id="search-prompt-dropdown">
+                <button
+                  type="button"
+                  class="search-prompt-element"
+                  id="search-prompt-trigger"
+                >
+                  Google
+                </button>
+                <div class="search-engine-menu" id="search-prompt-menu"></div>
+              </div>
+              <input
+                id="search-prompt-input"
+                class="prompt-input"
+                type="text"
+                placeholder="Search..."
+                autocomplete="off"
+              />
+            </div>
+            <div class="bookmarks">
+              <div class="tabs" id="tab-buttons" role="tablist"></div>
+              <div class="links" id="tab-links" role="tabpanel"></div>
+            </div>
+          </main>
         </div>
-        <div class="bookmarks">
-          <div class="tabs" id="tab-buttons" role="tablist"></div>
-          <div class="links" id="tab-links" role="tabpanel"></div>
-        </div>
-        <div class="clock-container"></div>
-      </main>
+      </div>
     </div>
 
     <!-- JSON Config -->
@@ -85,14 +96,38 @@
           "label": "Main",
           "columns": 2,
           "links": [
-            { "name": "MDN", "url": "https://developer.mozilla.org" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "W3C", "url": "https://www.w3.org" }
+            {
+              "name": "MDN",
+              "url": "https://developer.mozilla.org"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "W3C",
+              "url": "https://www.w3.org"
+            }
           ]
         },
         {
@@ -100,12 +135,30 @@
           "label": "Docs",
           "columns": 4,
           "links": [
-            { "name": "MDN", "url": "https://developer.mozilla.org" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "Test", "url": "https://github.com" },
-            { "name": "Google", "url": "https://github.com" },
-            { "name": "GitHub", "url": "https://github.com" },
-            { "name": "W3C", "url": "https://www.w3.org" }
+            {
+              "name": "MDN",
+              "url": "https://developer.mozilla.org"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "Test",
+              "url": "https://github.com"
+            },
+            {
+              "name": "Google",
+              "url": "https://github.com"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com"
+            },
+            {
+              "name": "W3C",
+              "url": "https://www.w3.org"
+            }
           ]
         }
       ]
@@ -113,17 +166,38 @@
 
     <script id="theme-image-map" type="application/json">
       {
-        "default": { "src": "images/default.png", "height": "300px" },
-        "solarized-dark": { "src": "images/default.png", "height": "300px" },
-        "gruvbox": { "src": "images/default.png", "height": "300px" },
-        "nord-dark": { "src": "images/default.png", "height": "300px" }
+        "default": {
+          "src": "images/default.png",
+          "height": "300px"
+        },
+        "solarized-dark": {
+          "src": "images/default.png",
+          "height": "300px"
+        },
+        "gruvbox": {
+          "src": "images/default.png",
+          "height": "300px"
+        },
+        "nord-dark": {
+          "src": "images/default.png",
+          "height": "300px"
+        }
       }
     </script>
     <script id="timezone-config" type="application/json">
       {
-        "sydney": { "label": "Sydney", "tz": "Australia/Sydney" },
-        "british-columbia": { "label": "BC", "tz": "Canada/Pacific" },
-        "saskatchewan": { "label": "Saska", "tz": "Canada/Saskatchewan" }
+        "sydney": {
+          "label": "Sydney",
+          "tz": "Australia/Sydney"
+        },
+        "british-columbia": {
+          "label": "BC",
+          "tz": "Canada/Pacific"
+        },
+        "saskatchewan": {
+          "label": "Saska",
+          "tz": "Canada/Saskatchewan"
+        }
       }
     </script>
 

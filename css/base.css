@@ -10,13 +10,13 @@
   --search-pad: 1rem;
   --bg: #ffffff;
   --fg: #000000;
+  --rail-w: 100px;
 }
 
 body {
   background-color: var(--bg);
   color: var(--fg);
   margin: 0;
-  padding: 2rem;
   font-family: sans-serif;
   transition: none;
 }
@@ -184,15 +184,53 @@ select {
   max-width: 30rem;
 }
 
-.container {
+.stage {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 4rem;
+  grid-template-columns: 100px minmax(0, 1fr);
+  width: 100%;
+  align-items: stretch;
+
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   align-items: start;
-  margin-top: 2rem;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.main-content-container {
+  display: flex;
+  /* margin-inline: auto; */
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.container {
+  grid-template-columns: minmax(220px, auto) minmax(0, 1fr);
+}
+
+.clock-dock {
+  grid-column: 1;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  padding-block: 12px; /* equal top/bottom inset */
+  box-sizing: border-box;
+}
+
+/* vertical stack of clocks */
+.clock-container {
+  display: grid;
+  row-gap: 12px;
+  justify-items: center;
+  width: 100%;
 }
 
 /* Sidebar layout */
@@ -411,22 +449,11 @@ select {
   color: var(--bg);
 }
 
-.clock-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
 .clock-block {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px; /* same as canvas width */
   text-align: center;
 }
 
