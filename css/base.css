@@ -131,17 +131,17 @@ select {
 
   position: relative; /* anchor the overlay */
   z-index: 0;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.1rem;
+  border-radius: 0.01rem;
+
+  padding: 0.1rem 0.2rem;
   text-decoration: none;
   /* define once, cheap to compute */
-  transition: color 90ms cubic-bezier(0.2, 0, 0, 1);
+  transition: color 20ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .links a.is-visible {
   display: flex;
   min-width: 0;
-  padding: 0.2rem 0.5rem;
   text-decoration: none;
 }
 .links a {
@@ -161,13 +161,13 @@ select {
   background: var(--xnordblue-1);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 90ms cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 20ms cubic-bezier(0.2, 0, 0, 1);
   z-index: -1;
 }
 
 .links a:hover,
 .links a:focus-visible {
-  color: var(--bg);
+  color: var(--bg-500);
 }
 
 .links a:hover::before,
