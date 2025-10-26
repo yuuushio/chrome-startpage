@@ -1,0 +1,386 @@
+/* Monaspace Argon NF webfaces — OTF served directly. Use:
+   body { font-family: "Monaspace Argon NF", monospace; } */
+
+/* ===== Base width (normal) ===== */
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-ExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-ExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-Light.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-LightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-Italic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-MediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-BoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-ExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-ExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+/* ===== SemiWide width ===== */
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-SemiWideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+
+/* ===== Wide width ===== */
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Argon NF";
+  src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-WideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}

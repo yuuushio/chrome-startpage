@@ -1,0 +1,386 @@
+/* Monaspace Radon NF webfaces (OTF) */
+/* Usage: body { font-family: "Monaspace Radon NF", monospace; } */
+
+/* ===== Base width ===== */
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-ExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-ExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-Light.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-LightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-Italic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-MediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-BoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-ExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-ExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+/* ===== SemiWide ===== */
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-SemiWideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+
+/* ===== Wide ===== */
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Radon NF";
+  src: url("./Monaspace/Monaspace Radon/MonaspaceRadonNF-WideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}

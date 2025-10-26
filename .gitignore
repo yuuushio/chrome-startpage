@@ -1,0 +1,4 @@
+
+# ignore font binaries
+fonts/**/*.otf
+fonts/**/*.woff2

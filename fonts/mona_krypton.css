@@ -1,0 +1,385 @@
+/* Monaspace Krypton NF webfaces (OTF) */
+
+/* ===== Base width ===== */
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-ExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-ExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-Light.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-LightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-Italic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-MediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-BoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-ExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-ExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+/* ===== SemiWide ===== */
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-SemiWideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: semi-expanded;
+  font-display: swap;
+}
+
+/* ===== Wide ===== */
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideExtraLight.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideExtraLightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideMedium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideMediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideSemiBold.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideSemiBoldItalic.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideExtraBold.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: expanded;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monaspace Krypton NF";
+  src: url("./Monaspace/Monaspace Krypton/MonaspaceKryptonNF-WideExtraBoldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: expanded;
+  font-display: swap;
+}

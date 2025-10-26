@@ -1,14 +1,10 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"); */
-
-/* @import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap"); */
-
-/* @import url("https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
-
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&display=swap");
+
+@import url("../fonts/mona_argon.css");
+@import url("../fonts/mona_radon.css");
+@import url("../fonts/mona_xenon.css");
+@import url("../fonts/mona_krypton.css");
 
 :root {
   --search-pad: 1rem;
@@ -16,8 +12,8 @@
   --fg: #000000;
   --rail-w: 100px;
   --search-font: "Terminess Nerd Font";
-  --bm-font: "Poppins";
-  --bm-font: "Sometype Mono";
+  --bm-font: "Monaspace Krypton NF";
+  --bm-tab-font: "Monaspace Radon NF";
   /* --bm-font: "Cutive Mono"; */
   /* --bm-font: "AnonymicePro Nerd Font"; */
   /* --bm-font: "Triplicate T4"; */
@@ -56,9 +52,10 @@ select {
   /* font-family: "Ysabeau Office"; */
 
   /* font-family: "Livvic"; */
-  font-family: var(--bm-font), monospace;
+  font-family: var(--bm-tab-font);
+  font-stretch: semi-expanded;
   font-size: 1.15rem;
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   /* border-radius: 0.4rem 0.4rem 0 0; */
   outline: none;
@@ -95,8 +92,9 @@ select {
   /* font-family: "Livvic"; */
 
   font-family: var(--bm-font);
+  font-stretch: semi-expanded;
   /* font-family: var(--search-font); */
-  font-weight: 400;
+  font-weight: 300;
   margin-top: 2.2rem;
   border: 0.15rem solid var(--bm-border);
   padding: 1rem;
@@ -125,8 +123,7 @@ select {
   display: none;
   text-decoration: none;
   color: var(--fg);
-  font-size: 1.15rem;
-  font-weight: 400;
+  font-size: 1rem;
   opacity: 85%;
 
   position: relative; /* anchor the overlay */
@@ -158,8 +155,7 @@ select {
   inset: 0;
   border-radius: inherit;
   background: transparent;
-  border-bottom: 1px solid var(--xnordblue-1);
-  color: var(--xnordblue-1);
+  color: var(--bm);
   /* background: var(--fg); */
   /* background: var(--xnordblue-1); */
   opacity: 0;
@@ -171,7 +167,7 @@ select {
 .links a:hover,
 .links a:focus-visible {
   /* color: var(--bg-500); */
-  /* color: var(--xnordblue-1); */
+  color: var(--bm);
 }
 
 .links a:hover::before,
