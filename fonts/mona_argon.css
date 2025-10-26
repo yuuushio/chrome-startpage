@@ -1,7 +1,6 @@
 /* Monaspace Argon NF webfaces — OTF served directly. Use:
    body { font-family: "Monaspace Argon NF", monospace; } */
 
-/* ===== Base width (normal) ===== */
 @font-face {
   font-family: "Monaspace Argon NF";
   src: url("./Monaspace/Monaspace Argon/MonaspaceArgonNF-ExtraLight.otf")

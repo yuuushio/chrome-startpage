@@ -13,6 +13,7 @@
   --rail-w: 100px;
   --search-font: "Terminess Nerd Font";
   --bm-font: "Monaspace Krypton NF";
+  /* --bm-font: "Monaspace Xenon NF"; */
   --bm-tab-font: "Monaspace Radon NF";
   /* --bm-font: "Cutive Mono"; */
   /* --bm-font: "AnonymicePro Nerd Font"; */
@@ -55,7 +56,7 @@ select {
   font-family: var(--bm-tab-font);
   font-stretch: semi-expanded;
   font-size: 1.15rem;
-  font-weight: 300;
+  font-weight: 200;
   cursor: pointer;
   /* border-radius: 0.4rem 0.4rem 0 0; */
   outline: none;
@@ -92,7 +93,7 @@ select {
   /* font-family: "Livvic"; */
 
   font-family: var(--bm-font);
-  font-stretch: semi-expanded;
+  /* font-stretch: semi-expanded; */
   /* font-family: var(--search-font); */
   font-weight: 300;
   margin-top: 2.2rem;
@@ -123,7 +124,7 @@ select {
   display: none;
   text-decoration: none;
   color: var(--fg);
-  font-size: 1rem;
+  font-size: 0.97rem;
   opacity: 85%;
 
   position: relative; /* anchor the overlay */
@@ -133,7 +134,11 @@ select {
   padding: 0.1rem 0.2rem;
   text-decoration: none;
   /* define once, cheap to compute */
-  transition: color 40ms cubic-bezier(0.2, 0, 0, 1);
+  transition:
+    color 10ms ease-out,
+    text-shadow 20ms ease-out;
+  text-shadow: none;
+  will-change: text-shadow;
 }
 
 .links a.is-visible {
@@ -160,14 +165,17 @@ select {
   /* background: var(--xnordblue-1); */
   opacity: 0;
   pointer-events: none;
-  transition: opacity 40ms cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 20ms cubic-bezier(0.2, 0, 0, 1);
   z-index: -1;
 }
 
 .links a:hover,
 .links a:focus-visible {
-  /* color: var(--bg-500); */
-  color: var(--bm);
+  color: var(--ny);
+  text-shadow:
+    0 0 0.5px color-mix(in srgb, var(--ny) 60%, transparent),
+    0 0 2px color-mix(in srgb, var(--ny) 40%, transparent),
+    0 0 8px color-mix(in srgb, var(--ny) 35%, transparent);
 }
 
 .links a:hover::before,
@@ -179,12 +187,13 @@ select {
 /* respect reduced motion without breaking hover feedback */
 @media (prefers-reduced-motion: reduce) {
   .links a {
-    transition: none;
+    transition:
+      color 0.01s linear,
+      text-shadow 0.01s linear;
   }
-  .links a::before,
-  .links a:active {
-    transition: none;
-    transform: none;
+  .links a:hover,
+  .links a:focus-visible {
+    text-shadow: none;
   }
 }
 
@@ -299,6 +308,10 @@ select {
 }
 
 #time {
+  font-family: var(--bm-font);
+  font-size: 0.75rem;
+  font-stretch: semi-expanded;
+  font-weight: 300;
   color: var(--xnordblue-2);
   opacity: 0.8;
 }
@@ -502,6 +515,9 @@ select {
   margin: 0 auto;
 }
 .clock-label {
+  font-family: var(--bm-tab-font);
+  opacity: 50%;
+  font-stretch: semi-expanded;
   margin-top: 0.25rem;
   font-size: 0.8rem;
   color: var(--fg);
