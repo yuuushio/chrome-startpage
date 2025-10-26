@@ -56,7 +56,7 @@ select {
   /* font-family: "Ysabeau Office"; */
 
   /* font-family: "Livvic"; */
-  font-family: "Triplicate T4", var(--bm-font), monospace;
+  font-family: var(--bm-font), monospace;
   font-size: 1.15rem;
   font-weight: 400;
   cursor: pointer;
@@ -329,9 +329,9 @@ select {
 .sidebar-image {
   align-self: center;
   inline-size: max-content;
-  padding: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 0.4rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
   background: linear-gradient(
@@ -369,7 +369,7 @@ select {
 .main {
   display: flex;
   flex-direction: column;
-  margin-top: 1.65rem;
+  margin-top: 1.75rem;
   gap: 1rem;
   max-width: 850px;
   width: 100%;
