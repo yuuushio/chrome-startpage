@@ -383,6 +383,7 @@ body {
   inline-size: max-content;
   margin-bottom: 1rem;
   padding: 0.6rem 0.4rem;
+  padding: 0;
   border-radius: var(--radius-3);
   background: linear-gradient(
     145deg,
