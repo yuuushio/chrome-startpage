@@ -635,8 +635,8 @@ select:focus {
   transition: opacity 0.2s ease;
 }
 
-menu {
-  max-height: min(60vh, 20px);
+.menu {
+  max-height: min(60vh, 100px);
   overflow: auto;
   overscroll-behavior: contain; /* prevent scroll chaining */
   -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
