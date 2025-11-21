@@ -4,7 +4,6 @@
 @import url("../fonts/mona_krypton.css");
 
 :root {
-  /* palette hooks provided by theme.*.css */
   --bg: #ffffff;
   --fg: #000000;
 
