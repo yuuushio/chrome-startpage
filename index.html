@@ -4,16 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Start Page</title>
-    <script>
-      (function () {
-        var t = localStorage.getItem("theme") || "default";
-        document.documentElement.className += " theme-" + t;
-        // inject the ONE variables file as a render-blocking stylesheet
-        document.write(
-          '<link rel="stylesheet" href="css/theme.' + t + '.css">',
-        );
-      })();
-    </script>
     <link rel="stylesheet" href="css/base.css" />
     <!-- themes are loaded dynamically -->
   </head>
@@ -217,6 +207,8 @@
         "google-fonts": "https://fonts.google.com/?query="
       }
     </script>
+
+    <script src="js/boot.js"></script>
     <script src="js/theme.js"></script>
   </body>
 </html>
