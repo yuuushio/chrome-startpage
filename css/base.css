@@ -10,7 +10,7 @@
 
   /* spacing + radii */
   --space-1: 0.2rem;
-  --space-2: 0.4rem;
+  --space-2: 0.3rem;
   --space-3: 0.6rem;
   --space-4: 0.8rem;
   --space-5: 1rem;
@@ -25,7 +25,7 @@
   /* typography */
   --bm-font: "Monaspace Krypton NF";
   --bm-tab-font: "Monaspace Radon NF";
-  --time-font: "Monaspace Argon NF";
+  --time-font: "Terminess Nerd Font";
   --search-font: "Terminess Nerd Font";
 
   --fs-root: 18px;
@@ -276,9 +276,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
-  height: 2rem;
+  width: 130px;
+  height: 2.6rem;
   padding: var(--space-2);
+  letter-spacing: 0.1rem;
   margin-bottom: 1.5rem;
   border-radius: var(--radius-2);
   background: linear-gradient(
@@ -292,10 +293,78 @@ body {
 }
 
 #time {
-  font: 300 0.75rem var(--time-font);
-  font-stretch: semi-expanded;
-  color: var(--xnordblue-2);
+  font: 300 1.1rem var(--time-font);
   opacity: 0.8;
+}
+
+/* subtle aurora glow for time */
+#time {
+  position: relative;
+  color: var(--nc);
+  text-shadow:
+    0 0 0.6px color-mix(in srgb, var(--nc) 60%, transparent),
+    0 0 3px color-mix(in srgb, var(--nc) 30%, transparent),
+    0 0 12px color-mix(in srgb, var(--ny) 15%, transparent);
+}
+
+/* gradient-drawn highlight, clipped to glyphs */
+#time::after {
+  content: attr(data-time);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  background:
+    radial-gradient(
+        120% 60% at 50% 18%,
+        color-mix(in srgb, var(--ny) 55%, transparent),
+        transparent 60%
+      )
+      no-repeat,
+    radial-gradient(
+        100% 80% at 28% 82%,
+        color-mix(in srgb, var(--xnordblue-2) 40%, transparent),
+        transparent 70%
+      )
+      no-repeat;
+  background-size:
+    160% 160%,
+    140% 140%;
+  background-position: var(--g1, 18% 12%), var(--g2, 42% 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: blur(0.8px);
+  opacity: var(--glow-a, 0.85);
+}
+
+/* gentle breathing of the glow */
+#time.animate {
+  animation: time-glow 6.5s ease-in-out infinite;
+}
+
+@keyframes time-glow {
+  0% {
+    --g1: 18% 12%;
+    --g2: 42% 88%;
+    --glow-a: 0.75;
+  }
+  50% {
+    --g1: 52% 18%;
+    --g2: 38% 84%;
+    --glow-a: 0.95;
+  }
+  100% {
+    --g1: 18% 12%;
+    --g2: 42% 88%;
+    --glow-a: 0.75;
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #time.animate {
+    animation: none;
+  }
 }
 
 .sidebar-top-date {
