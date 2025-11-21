@@ -591,14 +591,14 @@ select:focus {
   position: relative;
   display: inline-block;
   user-select: none;
-  font-size: 14px;
+  font-size: 0.7rem;
 }
 .trigger {
   display: flex;
   align-items: center;
   min-width: 48px;
   max-width: 220px;
-  height: 42px;
+  height: 32px;
   padding-inline: 24px;
   gap: 6px;
   border-radius: 8px;
@@ -644,11 +644,11 @@ select:focus {
 
 /* Optional: visible scrollbar only when needed and no layout shift */
 .menu::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 .menu::-webkit-scrollbar-thumb {
   background: color-mix(in srgb, var(--fg) 25%, transparent);
-  border-radius: 8px;
+  border-radius: 2px;
 }
 
 .open .menu {
@@ -657,13 +657,13 @@ select:focus {
 
 .menu-item {
   width: 100%;
-  padding: 8px 16px;
+  padding: 4px 4px;
   margin: 0 0 0.4rem 0;
   text-align: left;
   color: inherit;
   background: transparent;
   border: none;
-  border-radius: 6px;
+  border-radius: 2px;
   outline: none;
   font: inherit;
   cursor: pointer;
