@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&display=swap"); */
 
 @import url("../fonts/mona_argon.css");
 @import url("../fonts/mona_radon.css");
@@ -13,6 +13,7 @@
   --rail-w: 100px;
   --search-font: "Terminess Nerd Font";
   --bm-font: "Monaspace Krypton NF";
+  --time-font: "Monaspace Argon NF";
   /* --bm-font: "Monaspace Xenon NF"; */
   --bm-tab-font: "Monaspace Radon NF";
   /* --bm-font: "Cutive Mono"; */
@@ -308,7 +309,7 @@ select {
 }
 
 #time {
-  font-family: var(--bm-font);
+  font-family: var(--time-font);
   font-size: 0.75rem;
   font-stretch: semi-expanded;
   font-weight: 300;
@@ -517,9 +518,9 @@ select {
 .clock-label {
   font-family: var(--bm-tab-font);
   opacity: 50%;
-  font-stretch: semi-expanded;
+  /* font-stretch: semi-expanded; */
   margin-top: 0.25rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--fg);
 }
 
