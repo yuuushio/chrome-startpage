@@ -56,6 +56,7 @@ html {
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -633,6 +634,23 @@ select:focus {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
   transition: opacity 0.2s ease;
 }
+
+menu {
+  max-height: min(60vh, 20px);
+  overflow: auto;
+  overscroll-behavior: contain; /* prevent scroll chaining */
+  -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
+}
+
+/* Optional: visible scrollbar only when needed and no layout shift */
+.menu::-webkit-scrollbar {
+  width: 8px;
+}
+.menu::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--fg) 25%, transparent);
+  border-radius: 8px;
+}
+
 .open .menu {
   display: block;
 }
