@@ -28,10 +28,15 @@
   --time-font: "Monaspace Argon NF";
   --search-font: "Terminess Nerd Font";
 
-  --fs-root: 20px;
+  --fs-root: 18px;
 
   /* component-specific */
   --search-pad: var(--space-5);
+
+  --search-lh: 2.5;
+  --search-pad-y: 0.35rem;
+  --search-pad-x: 1rem;
+  --search-h: calc(1em * var(--search-lh) + 2 * var(--search-pad-y));
 }
 
 /********/
@@ -347,13 +352,13 @@ body {
 
 .search-prompt {
   display: flex;
-  align-items: center;
-  height: 1rem;
+  align-items: stretch;
+  min-height: var(--search-h);
+  line-height: var(--search-lh);
   margin-bottom: 1rem;
-  padding: var(--search-pad);
   padding-left: 0;
   border: 0.1rem solid var(--bg-600);
-  border-radius: var(--radius-1);
+  border-radius: 0.1rem;
   background: var(--bg-500);
   color: var(--nb);
   font-family: var(--search-font);
@@ -361,34 +366,41 @@ body {
 }
 
 .prompt-prefix-container {
-  position: relative;
+  position: relative; /* for z-index and menu positioning */
   display: flex;
-  white-space: nowrap;
-  border: none;
-  outline: none;
+  align-items: stretch;
+  z-index: 2; /* above the input */
 }
 
 .search-prompt-element {
-  margin-left: 0;
-  padding: var(--search-pad);
-  border: none;
-  outline: none;
+  display: flex;
+  align-items: center; /* vertical centering */
+  padding-block: var(--search-pad-y);
+  padding-inline: var(--search-pad-x);
+  height: auto; /* stretch with parent */
+  line-height: var(--search-lh);
+  box-sizing: border-box;
   background: var(--ngr);
+  border: 0;
+  outline: 0;
   font: inherit;
   cursor: pointer;
 }
 
 .prompt-input {
   flex: 1 1 auto;
+  padding-block: var(--search-pad-y);
+  padding-inline: 1rem 0; /* left 1rem matches button inline pad */
+  line-height: var(--search-lh);
+  border: 0;
+  outline: 0;
   background: transparent;
-  border: none;
-  outline: none;
   font: 400 1.2rem var(--search-font);
-  padding: 0.2rem 0 0.2rem 1rem;
-  caret-color: var(--ngr);
   color: var(--ngr);
+  caret-color: var(--ngr);
   opacity: 0.95;
 }
+
 .prompt-input::placeholder {
   color: var(--xnordblue-1);
   opacity: 0.35;
@@ -426,7 +438,9 @@ body {
 
 .search-engine-item {
   width: 100%;
-  padding: 0.5rem 14px;
+  padding: 0.4rem 14px;
+  padding-top: 0.5 * var(--search-h);
+  padding-bottom: 0.5 * var(--search-h);
   margin-bottom: 4px;
   text-align: left;
   background: transparent;
