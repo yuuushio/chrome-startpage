@@ -52,7 +52,6 @@
   let TAB_LIST = [];
   let BOOKMARK_CONFIG = []; // parsed array of tab objects
   let activeTabId = null; // string like "1", "2", etc.
-  const tabLinkElements = new Map(); // tabId -> array of <a> elements (template)
 
   document.querySelectorAll("input").forEach((el) => {
     el.setAttribute("autocomplete", "off");
@@ -301,22 +300,22 @@
     }
   }
 
-  function prepareBookmarkTemplate(config) {
-    // Build anchor elements once per tab and stash them
-    config.forEach((group) => {
-      const tabId = String(group.tab);
-      const links = Array.isArray(group.links) ? group.links : [];
-      const anchors = links.map((ln) => {
+  // keep only parsed JSON; build DOM per activation
+  function renderLinksForTab(tabId) {
+    const tab = BOOKMARK_CONFIG.find((t) => String(t.tab) === String(tabId));
+    const frag = document.createDocumentFragment();
+    if (tab && Array.isArray(tab.links)) {
+      for (const ln of tab.links) {
         const a = document.createElement("a");
         a.href = ln.url || "#";
         a.textContent = ln.name || ln.url || "";
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.setAttribute("data-tab", tabId);
-        return a;
-      });
-      tabLinkElements.set(tabId, anchors);
-    });
+        a.className = "is-visible";
+        frag.appendChild(a);
+      }
+    }
+    linkContainer.replaceChildren(frag);
   }
 
   function renderTabs() {
@@ -410,7 +409,6 @@
   }
 
   function activateTab(tabId) {
-    if (!tabLinkElements.has(String(tabId))) return;
     activeTabId = String(tabId);
     document.documentElement.setAttribute("data-active-tab", activeTabId);
     localStorage.setItem(TAB_KEY, activeTabId);
@@ -425,15 +423,7 @@
     // ensure flex layout; strip legacy grid classes
     linkContainer.classList.add("links");
 
-    // render only active tab links and mark visible
-    const anchors = tabLinkElements.get(activeTabId) || [];
-    const frag = document.createDocumentFragment();
-    for (const a of anchors) {
-      const c = a.cloneNode(true);
-      c.classList.add("is-visible");
-      frag.appendChild(c);
-    }
-    linkContainer.replaceChildren(frag);
+    renderLinksForTab(activeTabId);
   }
 
   function initTabs() {
