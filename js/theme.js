@@ -289,7 +289,10 @@
   function updateDropdownSelection(theme) {
     if (!trigger || !menu) return;
     const labelEl = trigger.querySelector(".label");
-    if (labelEl) labelEl.textContent = theme;
+    if (labelEl) {
+      const rec = THEME_MAP.get(theme);
+      labelEl.textContent = (rec && rec.label) || theme;
+    }
     menu.querySelectorAll(".menu-item").forEach((btn) => {
       const is = btn.dataset.value === theme;
       btn.classList.toggle("active", is);
@@ -299,16 +302,14 @@
 
   let themeMenuBuilt = false;
   function buildThemeDropdown() {
-    if (!menu || themeMenuBuilt) return;
-    const themeKeys = Object.keys(imageConfig).filter((k) =>
-      THEMES.includes(k),
-    );
+    if (!menu) return;
     const frag = document.createDocumentFragment();
-    for (const key of themeKeys) {
+    for (const rec of THEME_REG) {
+      const key = rec.key;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "menu-item";
-      btn.textContent = key;
+      btn.textContent = rec.label || key;
       btn.dataset.value = key;
       btn.setAttribute("role", "option");
       btn.addEventListener("click", (e) => {
@@ -319,7 +320,6 @@
       frag.appendChild(btn);
     }
     menu.replaceChildren(frag);
-    themeMenuBuilt = true;
   }
 
   function initTheme() {
