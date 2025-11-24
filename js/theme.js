@@ -32,21 +32,42 @@
 
   let currentSearchEngine = null;
 
-  // must match the html selector *values*
-  const THEMES = [
-    "default",
-    "solarized-dark",
-    "gruvbox",
-    "nord-dark",
-    "aphelion",
-  ];
   const THEME_KEY = "theme";
   const TAB_KEY = "activeTab";
-  const themeDir = "css/";
-  const imageConfig = JSON.parse(
-    document.getElementById("theme-image-map").textContent,
-  );
+
+  // theme registry
   const imageEl = document.getElementById("theme-image");
+  let THEME_REG = [];
+  let THEME_MAP = new Map();
+  (function loadThemeRegistry() {
+    const el = document.getElementById("themes-config");
+    if (el) {
+      try {
+        const arr = JSON.parse(el.textContent) || [];
+        if (Array.isArray(arr)) THEME_REG = arr;
+      } catch (_) {}
+    }
+    // fallback for legacy setups
+    if (!THEME_REG.length) {
+      THEME_REG = [
+        { key: "default", label: "Default", href: "css/theme.default.css" },
+        {
+          key: "solarized-dark",
+          label: "Solarized Dark",
+          href: "css/theme.solarized-dark.css",
+        },
+        { key: "gruvbox", label: "Gruvbox", href: "css/theme.gruvbox.css" },
+        {
+          key: "nord-dark",
+          label: "Nord Dark",
+          href: "css/theme.nord-dark.css",
+        },
+        { key: "aphelion", label: "Aphelion", href: "css/theme.aphelion.css" },
+      ];
+    }
+    THEME_MAP = new Map(THEME_REG.map((t) => [t.key, t]));
+  })();
+
   let currentTheme = null;
   const loadedThemes = new Set();
   let TAB_LIST = [];
