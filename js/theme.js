@@ -136,20 +136,32 @@
   function initSearchPrompt() {
     buildSearchMenu();
     loadSearchEngine();
-    if (searchTrigger) {
-      searchTrigger.addEventListener("click", (e) => {
-        e.stopPropagation();
-        searchDropdown.classList.toggle("open");
-      });
-    }
-    document.addEventListener("click", () =>
-      searchDropdown.classList.remove("open"),
-    );
+
     if (searchInput) {
       searchInput.addEventListener("keydown", handleSearchInput);
     }
   }
-
+  let outside = null;
+  function open() {
+    searchDropdown.classList.add("open");
+    outside = (ev) => {
+      if (!searchDropdown.contains(ev.target)) close();
+    };
+    document.addEventListener("click", outside);
+  }
+  function close() {
+    searchDropdown.classList.remove("open");
+    if (outside) {
+      document.removeEventListener("click", outside);
+      outside = null;
+    }
+  }
+  if (searchTrigger) {
+    searchTrigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      searchDropdown.classList.contains("open") ? close() : open();
+    });
+  }
   function applyNeumorph() {
     // Matches neumorphism.io defaults
     const base = getComputedStyle(root).getPropertyValue("--bg").trim();
@@ -678,7 +690,6 @@
     }
     if (!Array.isArray(BOOKMARK_CONFIG)) BOOKMARK_CONFIG = [];
 
-    prepareBookmarkTemplate(BOOKMARK_CONFIG);
     initTheme();
     initSearchPrompt();
     renderTabs();
