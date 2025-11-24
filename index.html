@@ -134,29 +134,41 @@
       ]
     </script>
 
-    <script id="theme-image-map" type="application/json">
-      {
-        "default": {
-          "src": "images/default.png",
-          "height": "300px"
+    <script id="themes-config" type="application/json">
+      [
+        {
+          "key": "default",
+          "label": "Default",
+          "href": "css/theme.default.css",
+          "image": { "src": "images/default.png", "height": "300px" }
         },
-        "solarized-dark": {
-          "src": "images/default.png",
-          "height": "300px"
+        {
+          "key": "solarized-dark",
+          "label": "Solarized Dark",
+          "href": "css/theme.solarized-dark.css",
+          "image": { "src": "images/default.png", "height": "300px" }
         },
-        "gruvbox": {
-          "src": "images/ttt1.png",
-          "height": "350px"
-        },
-        "nord-dark": {
-          "src": "images/default.png",
-          "height": "300px"
-        },
-        "aphelion": {
-          "src": "images/pale_horse.png",
-          "height": "400px"
+        {
+          "key": "gruvbox",
+          "label": "Gruvbox",
+          "href": "css/theme.gruvbox.css",
+          "image": { "src": "images/ttt1.png", "height": "350px" }
         }
-      }
+
+        {
+          "key": "nord-dark",
+          "label": "Nord Dark",
+          "href": "css/theme.nord-dark.css",
+          "image": { "src": "images/default.png", "height": "350px" }
+        }
+
+        {
+          "key": "aphelion",
+          "label": "Aphelion",
+          "href": "css/theme.aphelion.css",
+          "image": { "src": "images/pale_horse.png", "height": "400px" }
+        }
+      ]
     </script>
     <script id="timezone-config" type="application/json">
       {
