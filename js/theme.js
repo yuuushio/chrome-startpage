@@ -194,15 +194,15 @@
     root.style.setProperty("--neu-shadow-lite", c.shadowLite);
   }
 
-  function loadThemeSheet(theme) {
-    // if (loadedThemes.has(theme)) return;
-    if (loadedThemes.has(theme)) return Promise.resolve();
+  function loadThemeSheet(themeKey) {
+    if (loadedThemes.has(themeKey)) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = `${themeDir}/theme.${theme}.css`;
+      const rec = THEME_MAP.get(themeKey);
+      link.href = rec && rec.href ? rec.href : `css/theme.${themeKey}.css`;
       link.onload = () => {
-        loadedThemes.add(theme);
+        loadedThemes.add(themeKey);
         resolve();
       };
       link.onerror = reject;
