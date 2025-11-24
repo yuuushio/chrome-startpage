@@ -323,8 +323,9 @@
   }
 
   function initTheme() {
-    const saved = localStorage.getItem(THEME_KEY) || THEMES[0];
-    buildThemeDropdown(); // must come before updating label
+    const fallback = THEME_REG[0] ? THEME_REG[0].key : "default";
+    const saved = localStorage.getItem(THEME_KEY) || fallback;
+    buildThemeDropdown();
     setTheme(saved);
     // wire dropdown toggle
     if (trigger) {
