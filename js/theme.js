@@ -306,7 +306,6 @@
       const tabId = String(tabObj.tab);
       const btn = document.createElement("button");
       btn.type = "button";
-      // no dependency on .tab-button for your CSS; extra class is harmless if you keep it, but active is is-active
       btn.setAttribute("data-tab-btn", tabId);
       btn.setAttribute("role", "tab");
       btn.setAttribute(
@@ -502,9 +501,42 @@
     return { container, canvas };
   }
 
-  // replace your drawClock with this parts-based version; no offset math anywhere
+  let CLOCK_STYLE = null;
+  function refreshClockStyle() {
+    const cs = getComputedStyle(document.documentElement);
+    // defer until themed CSS is applied; empty string means not ready
+    const face = cs.getPropertyValue("--bg-500").trim();
+    if (!face) return false;
+    CLOCK_STYLE = {
+      face,
+      tick: cs.getPropertyValue("--xgray-2").trim() || "#000",
+      hand: cs.getPropertyValue("--xnordblue-2").trim() || "#000",
+      secAM:
+        cs.getPropertyValue("--sec-am").trim() ||
+        cs.getPropertyValue("--nr").trim() ||
+        "#000",
+      secPM:
+        cs.getPropertyValue("--sec-pm").trim() ||
+        cs.getPropertyValue("--br").trim() ||
+        "#000",
+    };
+    return true;
+  }
+
+  // keep the cache in sync with theme swaps
+  const themeObserver = new MutationObserver(() => {
+    refreshClockStyle();
+  });
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
   function drawClockParts(ctx, { h, m, s, isPM }) {
-    const styles = getComputedStyle(document.documentElement);
+    if (!CLOCK_STYLE && !refreshClockStyle()) {
+      // stylesheet not ready yet; paint nothing this frame
+      return;
+    }
     const size = ctx.canvas.width;
     const r = size / 2;
 
@@ -512,10 +544,10 @@
     // face
     ctx.beginPath();
     ctx.arc(r, r, r - 1, 0, Math.PI * 2);
-    ctx.fillStyle = styles.getPropertyValue("--bg-500").trim() || "#f9f9f9";
+    ctx.fillStyle = CLOCK_STYLE.face;
     ctx.fill();
-    const tick = styles.getPropertyValue("--xgray-2").trim() || "#000";
-    ctx.strokeStyle = tick;
+
+    ctx.strokeStyle = CLOCK_STYLE.tick;
     ctx.lineWidth = 2;
     ctx.stroke();
     for (let i = 0; i < 12; i++) {
@@ -526,13 +558,8 @@
       ctx.stroke();
     }
 
-    const hand = styles.getPropertyValue("--xnordblue-2").trim() || "#000";
-    const sec = (
-      (isPM
-        ? styles.getPropertyValue("--sec-pm") || styles.getPropertyValue("--br")
-        : styles.getPropertyValue("--sec-am") ||
-          styles.getPropertyValue("--nr")) || "#000"
-    ).trim();
+    const hand = CLOCK_STYLE.hand;
+    const sec = isPM ? CLOCK_STYLE.secPM : CLOCK_STYLE.secAM;
 
     const to = (u, max) => (Math.PI * 2 * u) / max - Math.PI / 2;
     const draw = (ang, len, wid, col) => {
