@@ -222,7 +222,7 @@
 
   const THEME_PREFIX = "theme-";
   function setTheme(theme) {
-    if (!THEMES.includes(theme) || theme === currentTheme) return;
+    if (!THEME_MAP.has(theme) || theme === currentTheme) return;
     currentTheme = theme;
 
     const kept = root.className
@@ -255,10 +255,11 @@
       }
     });
 
-    if (imageEl && imageConfig[theme]) {
-      const { src, height } = imageConfig[theme];
-      imageEl.src = src;
-      imageEl.style.height = height;
+    if (imageEl) {
+      const rec = THEME_MAP.get(theme);
+      const img = rec && rec.image ? rec.image : null;
+      if (img && img.src) imageEl.src = img.src;
+      if (img && img.height) imageEl.style.height = img.height;
     }
     localStorage.setItem(THEME_KEY, theme);
     updateDropdownSelection(theme);
