@@ -245,6 +245,7 @@
 
   function openDropdown() {
     if (!dropdown) return;
+    buildThemeDropdown();
     dropdown.classList.add("open");
     trigger?.setAttribute("aria-expanded", "true");
     document.addEventListener("click", outsideClick);
@@ -274,29 +275,29 @@
     });
   }
 
+  let themeMenuBuilt = false;
   function buildThemeDropdown() {
-    if (!menu) return;
-    // derive options from imageConfig but constrain to known THEMES
+    if (!menu || themeMenuBuilt) return;
     const themeKeys = Object.keys(imageConfig).filter((k) =>
       THEMES.includes(k),
     );
-    menu.textContent = "";
-    themeKeys.forEach((key) => {
+    const frag = document.createDocumentFragment();
+    for (const key of themeKeys) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "menu-item";
       btn.textContent = key;
       btn.dataset.value = key;
       btn.setAttribute("role", "option");
-      btn.setAttribute("aria-selected", "false");
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         setTheme(key);
-        updateDropdownSelection(key);
         closeDropdown();
       });
-      menu.appendChild(btn);
-    });
+      frag.appendChild(btn);
+    }
+    menu.replaceChildren(frag);
+    themeMenuBuilt = true;
   }
 
   function initTheme() {
