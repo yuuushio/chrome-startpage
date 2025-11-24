@@ -379,71 +379,6 @@
     tabContainer.appendChild(frag);
   }
 
-  function getEffectiveColumnCount(tabObj) {
-    if (
-      tabObj.columns &&
-      Number.isInteger(tabObj.columns) &&
-      tabObj.columns > 0
-    ) {
-      return tabObj.columns;
-    }
-    // fallback defaults
-    return tabObj.layout === "row" ? 3 : 4;
-  }
-
-  function stabilizeBookmarksHeight() {
-    if (!linkContainer || !BOOKMARK_CONFIG.length) return;
-    const containerWidth = linkContainer.clientWidth;
-
-    const measurer = document.createElement("div");
-    measurer.style.position = "absolute";
-    measurer.style.visibility = "hidden";
-    measurer.style.top = "0";
-    measurer.style.left = "-9999px";
-    measurer.style.width = containerWidth + "px";
-    document.body.appendChild(measurer);
-
-    let maxContentH = 0;
-
-    BOOKMARK_CONFIG.forEach((tabObj) => {
-      const tabId = String(tabObj.tab);
-      measurer.textContent = "";
-      measurer.className = "";
-      const layoutClass =
-        tabObj.layout === "row" ? "layout-row" : "layout-column";
-      measurer.classList.add(layoutClass);
-      measurer.style.setProperty(
-        "--col-count",
-        getEffectiveColumnCount(tabObj),
-      );
-
-      const anchors = tabLinkElements.get(tabId) || [];
-      anchors.forEach((a) => {
-        const c = a.cloneNode(true);
-        c.classList.add("is-visible");
-        measurer.appendChild(c);
-      });
-
-      // force layout and measure
-      const h = measurer.getBoundingClientRect().height;
-      if (h > maxContentH) maxContentH = h;
-    });
-
-    document.body.removeChild(measurer);
-
-    // account for linkContainer's own padding/border if content-box
-    const style = getComputedStyle(linkContainer);
-    let extra = 0;
-    if (style.boxSizing === "content-box") {
-      extra += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-      extra +=
-        parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-    }
-    const finalHeight = Math.ceil(maxContentH + extra);
-    linkContainer.style.height = finalHeight + "px";
-    linkContainer.style.overflowY = "auto";
-  }
-
   function activateTab(tabId) {
     activeTabId = String(tabId);
     document.documentElement.setAttribute("data-active-tab", activeTabId);
@@ -727,10 +662,6 @@
 
   const ro = new ResizeObserver(
     debounce(() => {
-      // clear previously fixed height so measurement is accurate
-      linkContainer.style.height = "";
-      // stabilizeBookmarksHeight();
-      // reapply current tab so visible links stay
       if (activeTabId) activateTab(activeTabId);
     }, 100),
   );
