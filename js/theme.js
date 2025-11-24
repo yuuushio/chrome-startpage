@@ -200,7 +200,27 @@
     root.className = kept.join(" ");
 
     loadThemeSheet(theme).then(() => {
-      if (theme === currentTheme) applyNeumorph();
+      if (theme !== currentTheme) return;
+      applyNeumorph();
+      refreshClockStyle();
+      // force a repaint so the face updates immediately
+      if (typeof requestAnimationFrame !== "undefined") {
+        requestAnimationFrame(() => {
+          const canvases = document.querySelectorAll(".clock-block canvas");
+          canvases.forEach((cv) => {
+            const ctx = cv.getContext("2d");
+            // draw current time once; steady loop will take over next tick
+            const now = new Date();
+            const parts = {
+              h: now.getHours(),
+              m: now.getMinutes(),
+              s: now.getSeconds(),
+              isPM: now.getHours() >= 12,
+            };
+            drawClockParts(ctx, parts);
+          });
+        });
+      }
     });
 
     if (imageEl && imageConfig[theme]) {
@@ -674,6 +694,7 @@
     renderTabs();
     // stabilizeBookmarksHeight();
     initTabs();
+    refreshClockStyle();
     startClocks();
     updateTime(); // initialize immediately
     setInterval(updateTime, 1000);
