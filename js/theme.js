@@ -68,6 +68,23 @@
     THEME_MAP = new Map(THEME_REG.map((t) => [t.key, t]));
   })();
 
+  let DENSITY_PRESETS = {
+    compact: { cellMin: "10ch", gap: "0.4rem 0.4rem" },
+    cozy: { cellMin: "14ch", gap: "0.7rem 0.6rem" }, // default-equivalent
+    roomy: { cellMin: "18ch", gap: "0.9rem 0.8rem" },
+  };
+
+  (() => {
+    const el = document.getElementById("density-presets");
+    if (!el) return;
+    try {
+      const user = JSON.parse(el.textContent);
+      if (user && typeof user === "object") {
+        DENSITY_PRESETS = { ...DENSITY_PRESETS, ...user };
+      }
+    } catch {}
+  })();
+
   let currentTheme = null;
   const loadedThemes = new Set();
   let TAB_LIST = [];
@@ -128,6 +145,46 @@
       .join(" ");
     Array.from(searchMenu.children).forEach((btn) =>
       btn.classList.toggle("active", btn.dataset.value === currentSearchEngine),
+    );
+  }
+
+  function resolveDensity(density) {
+    if (!density) return null;
+
+    // Named preset
+    if (typeof density === "string") {
+      if (DENSITY_PRESETS[density]) return DENSITY_PRESETS[density];
+      // Raw CSS length (e.g. "12ch", "16px", "1rem")
+      if (/^\d+(\.\d+)?(ch|px|rem|em|%)$/.test(density)) {
+        return { cellMin: density };
+      }
+      return null;
+    }
+
+    // Advanced object: { cellMin, gap }
+    if (typeof density === "object") {
+      const out = {};
+      if (typeof density.cellMin === "string") out.cellMin = density.cellMin;
+      if (typeof density.gap === "string") out.gap = density.gap;
+      return Object.keys(out).length ? out : null;
+    }
+    return null;
+  }
+
+  function applyTabDensity(tabObj) {
+    const spec = resolveDensity(tabObj && tabObj.density);
+    if (!spec) {
+      linkContainer.style.removeProperty("--cell-min");
+      linkContainer.style.removeProperty("--links-gap");
+      linkContainer.removeAttribute("data-density");
+      return;
+    }
+    if (spec.cellMin)
+      linkContainer.style.setProperty("--cell-min", spec.cellMin);
+    if (spec.gap) linkContainer.style.setProperty("--links-gap", spec.gap);
+    linkContainer.setAttribute(
+      "data-density",
+      tabObj.density?.toString() || "",
     );
   }
 
@@ -381,8 +438,7 @@
 
   function activateTab(tabId) {
     activeTabId = String(tabId);
-    document.documentElement.setAttribute("data-active-tab", activeTabId);
-    localStorage.setItem(TAB_KEY, activeTabId);
+    const tabObj = BOOKMARK_CONFIG.find((t) => String(t.tab) === activeTabId);
 
     // tab button state
     document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
@@ -391,10 +447,16 @@
       btn.setAttribute("aria-selected", is ? "true" : "false");
     });
 
-    // ensure flex layout; strip legacy grid classes
-    linkContainer.classList.add("links");
+    // apply density first for a single layout
+    applyTabDensity(tabObj);
 
+    // render links for the active tab
+    linkContainer.classList.add("links");
     renderLinksForTab(activeTabId);
+
+    // persist selection
+    document.documentElement.setAttribute("data-active-tab", activeTabId);
+    localStorage.setItem(TAB_KEY, activeTabId);
   }
 
   function initTabs() {

@@ -118,7 +118,7 @@ body {
 .links {
   --cell-bin: 14ch;
   display: grid;
-  gap: 0.7rem 0.6rem;
+  gap: var(--links-gap, 0.7rem 0.6rem);
   grid-template-columns: repeat(auto-fit, minmax(var(--cell-min, 14ch), 1fr));
   justify-items: start;
   align-items: center;
