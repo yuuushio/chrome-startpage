@@ -494,6 +494,30 @@
     });
   }
 
+  function initGlobalSearchFocus() {
+    if (!searchInput) return;
+
+    // treat anything matching this as a real control the user intended to use
+    const INTERACTIVE =
+      "a,button,input,textarea,select,label,details,summary," +
+      '[role="button"],[role="menuitem"],[role="option"],[contenteditable],' +
+      ".dropdown,.menu,.menu *,.search-engine-menu,.search-engine-menu *," +
+      ".tabs,.tabs *";
+
+    document.addEventListener(
+      "click",
+      (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        if (t.closest(INTERACTIVE)) return;
+        if (document.activeElement === searchInput) return;
+        // do not jump the page if the input is out of view
+        searchInput.focus({ preventScroll: true });
+      },
+      true, // capture so it runs before other handlers without interfering
+    );
+  }
+
   function getTimezonesConfig() {
     const configEl = document.getElementById("timezone-config");
     if (!configEl) return {};
@@ -701,7 +725,6 @@
       t = setTimeout(() => fn(...args), wait);
     };
   }
-
   document.addEventListener("DOMContentLoaded", () => {
     try {
       BOOKMARK_CONFIG = JSON.parse(bookmarkData.textContent);
@@ -713,6 +736,7 @@
 
     initTheme();
     initSearchPrompt();
+    initGlobalSearchFocus();
     renderTabs();
     // stabilizeBookmarksHeight();
     initTabs();
