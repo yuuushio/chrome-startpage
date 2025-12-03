@@ -402,8 +402,6 @@
         const a = document.createElement("a");
         a.href = ln.url || "#";
         a.textContent = ln.name || ln.url || "";
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
         a.className = "is-visible";
         frag.appendChild(a);
       }
