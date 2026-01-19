@@ -1,5 +1,7 @@
 # StartPage
 
+![Preview](_assets/preview_1.png)
+
 A local start page meant to be looked at, used, and altered without any complex overhead. It provides themed layout, tabbed bookmarks, a search prompt with selectable engines, and a dock of world clocks. Very plain and straightforward configuration: edit the JSON blocks embedded in `index.html`.
 
 ## What you get
@@ -10,8 +12,6 @@ A local start page meant to be looked at, used, and altered without any complex 
 - World clocks rendered locally from IANA timezone identifiers.
 
 ## Install
-
-### Option B: Chrome / Chromium new-tab override
 
 Load as an unpacked extension:
 
